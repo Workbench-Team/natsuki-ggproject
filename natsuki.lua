@@ -6,3 +6,4 @@ json = require('json')
 timer = require('timer')
 discordia.extensions()
 prefix = '.'
+version = '0.0'
