@@ -7,3 +7,4 @@ timer = require('timer')
 discordia.extensions()
 prefix = '.'
 version = '0.0'
+token = json.decode(io.open("token.json", "r"):read("*a"))["value"]
