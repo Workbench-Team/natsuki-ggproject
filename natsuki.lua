@@ -33,7 +33,7 @@ cl:on('messageCreate', function(msg)
 	local args = cont:split(' ')
 
 	if args[1] == pref..'!' then
-		exec(msg, cont, args)
+		exec(msg, args)
 	end
 
 	if args[1] == pref..'help' then

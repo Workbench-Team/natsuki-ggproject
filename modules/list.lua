@@ -1,3 +1,3 @@
 return {
-	m_help = require('help')
+	require('modules/help')
 }
