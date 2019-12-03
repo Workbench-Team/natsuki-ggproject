@@ -8,7 +8,7 @@ disc.extensions()
 pref = '.'
 ver = '0.0'
 
-admin = require('admin')
+require('admin')
 require('groups')
 
 

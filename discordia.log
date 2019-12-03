@@ -94,3 +94,11 @@
 2019-12-03 07:45:00 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
 2019-12-03 07:45:00 | [INFO]    | Shard 0 : Received HELLO
 2019-12-03 07:45:00 | [INFO]    | Shard 0 : Received READY
+2019-12-03 07:50:26 | [INFO]    | Discordia 2.7.0
+2019-12-03 07:50:26 | [INFO]    | Connecting to Discord...
+2019-12-03 07:50:26 | [INFO]    | Authenticated as Natsuki#8858
+2019-12-03 07:50:26 | [INFO]    | Launching shard 0 (1 out of 1)...
+2019-12-03 07:50:26 | [INFO]    | Shard 0 : Connected to wss://gateway.discord.gg
+2019-12-03 07:50:26 | [INFO]    | Shard 0 : Received HELLO
+2019-12-03 07:50:26 | [INFO]    | Shard 0 : Received READY
+2019-12-03 07:52:17 | [ERROR]   | 400 - BAD REQUEST : POST https://discordapp.com/api/v7/channels/607249903629893643/messages
