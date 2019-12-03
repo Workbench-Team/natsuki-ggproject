@@ -6,11 +6,7 @@ json = require('json')
 timer = require('timer')
 disc.extensions()
 pref = '.'
-ver = '0.0'
-
-require('admin')
-require('groups')
-require('modules/help')
+ver = '3.0 dev'
 
 
 
@@ -19,8 +15,17 @@ cl:run('Bot '..token)
 
 
 
+require('admin')
+require('groups')
+require('modules')
+
+
 cl:on('ready', function()
 	print(cl.user.tag..' launched')
+	cl:setGame {
+		type = 3,
+		name = ver
+	}
 end)
 
 cl:on('messageCreate', function(msg)
@@ -30,6 +35,7 @@ cl:on('messageCreate', function(msg)
 	if args[1] == pref..'!' then
 		exec(msg, cont, args)
 	end
+
 	if args[1] == pref..'help' then
 		help(msg)
 	end
