@@ -17,7 +17,7 @@ cl:run('Bot '..token)
 
 require('admin')
 require('groups')
-require('modules')
+require('modules/list')
 
 
 cl:on('ready', function()
