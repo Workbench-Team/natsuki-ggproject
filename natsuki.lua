@@ -10,6 +10,7 @@ ver = '0.0'
 
 require('admin')
 require('groups')
+require('modules/help')
 
 
 
@@ -28,5 +29,8 @@ cl:on('messageCreate', function(msg)
 
 	if args[1] == pref..'!' then
 		exec(msg, cont, args)
+	end
+	if args[1] == pref..'help' then
+		help(msg)
 	end
 end)

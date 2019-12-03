@@ -5,6 +5,6 @@ function exec(msg, cont, args)
 	local cmd = table.concat(args, ' ')
 	local handle = io.popen(cmd)
 	local result = handle:read('*a')
-	msg:reply('```bash\n'..result..'\n```')
+	msg:reply(result)
 	handle:close()
 end
