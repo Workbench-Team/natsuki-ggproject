@@ -8,13 +8,25 @@ disc.extensions()
 pref = '.'
 ver = '0.0'
 
+admin = require('admin')
+require('groups')
+
 
 
 token = json.decode(io.open("token.json", "r"):read("*a"))["value"]
-cl:run('Bot'..token)
+cl:run('Bot '..token)
 
 
 
-cl:on('ready' function()
+cl:on('ready', function()
 	print(cl.user.tag..' launched')
+end)
+
+cl:on('messageCreate', function(msg)
+	local cont = msg.content
+	local args = cont:split(' ')
+
+	if args[1] == pref..'!' then
+		exec(msg, cont, args)
+	end
 end)
