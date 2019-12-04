@@ -10,6 +10,7 @@ function help(msg)
 			icon_url = _G.cl.user.avatarURL,
 			text = _G.cl.user.tag
 		},
+		color = 3586419,
 		fields = {
 			{name=_G.pref..'help',value='Выводит помощь по командам'},
 			{name=_G.pref..'img',value='NSFW и SFW картинки с сайта nekos.life'},
