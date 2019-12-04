@@ -15,7 +15,8 @@ function help(msg)
 			{name=_G.pref..'help',value='Выводит помощь по командам'},
 			{name=_G.pref..'img',value='NSFW и SFW картинки с сайта nekos.life'},
 			{name=_G.pref..'say[d] <text>',value='Сказать <text>\nd - удалить ваше сообщение'}
-		}
+		},
+		timestamp = _G.disc.Date():toISO('T', 'Z')
 	}
 	msg:reply { embed = table }
 end
