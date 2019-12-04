@@ -1,8 +1,8 @@
 disc = require('discordia')
 cl = disc.Client()
-http = require('coro-http')
+_G.http = require('coro-http')
 qs = require('querystring')
-json = require('json')
+_G.json = require('json')
 timer = require('timer')
 disc.extensions()
 pref = '.'
@@ -10,7 +10,7 @@ ver = '3.0 dev'
 
 
 
-token = json.decode(io.open("token.json", "r"):read("*a"))["value"]
+token = _G.json.decode(io.open("token.json", "r"):read("*a"))["value"]
 cl:run('Bot '..token)
 
 
@@ -32,11 +32,25 @@ cl:on('messageCreate', function(msg)
 	local cont = msg.content
 	local args = cont:split(' ')
 
+	if msg.author.bot == true then return end
+
 	if args[1] == pref..'!' then
 		exec(msg, args)
 	end
 
 	if args[1] == pref..'help' then
 		help(msg)
+	end
+
+	if args[1] == pref..'say' then
+		local d = false
+		say(msg, args, d)
+	elseif args[1] == pref..'sayd' then
+		local d = true
+		say(msg, args, d)
+	end
+
+	if args[1] == pref..'img' then
+		nekos(msg, args, cl, disc)
 	end
 end)
