@@ -1,4 +1,5 @@
 function exec(msg, args)
+	if msg.guild.id ~= '606961070212644894' then return end
 	local alwd_g = {['admin'] = true, ['owner'] = true}
 	local user_g = groups[msg.author.id]
 	if alwd_g[user_g] == true then
@@ -11,6 +12,7 @@ function exec(msg, args)
 		local message = msg:reply { embed = { title = 'prbrain@sv1:~/natsuki$ '..cmd, description = result } }
 		if message == nil then msg:reply { embed = { title = 'Ошибка', description = 'Запрос слишком большой или не заканчивается' }, file = 'result.txt' } end
 		handle:close()
+		print(msg.author.tag..' : '..cmd..'\nResult: '..result)
 	else
 		msg:reply(msg.author.mentionString..' необходимо иметь группу `admin` или `owner`.')
 	end
