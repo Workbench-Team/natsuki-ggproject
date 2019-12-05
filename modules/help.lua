@@ -14,7 +14,8 @@ function help(msg)
 		fields = {
 			{name=_G.pref..'help',value='Выводит помощь по командам'},
 			{name=_G.pref..'img',value='NSFW и SFW картинки с сайта nekos.life'},
-			{name=_G.pref..'say[d] <text>',value='Сказать <text>\nd - удалить ваше сообщение'}
+			{name=_G.pref..'say[d] <text>',value='Сказать <text>\nd - удалить ваше сообщение'},
+			{name=_G.pref..'fox',value='Картинки с лисичками :3'}
 		},
 		timestamp = _G.disc.Date():toISO('T', 'Z')
 	}

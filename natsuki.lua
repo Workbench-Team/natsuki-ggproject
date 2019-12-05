@@ -53,4 +53,8 @@ _G.cl:on('messageCreate', function(msg)
 	if args[1] == pref..'img' then
 		nekos(msg, args)
 	end
+
+	if args[1] == pref..'fox' then
+		fox(msg, args)
+	end
 end)
