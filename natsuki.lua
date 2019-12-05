@@ -21,9 +21,8 @@ require('modules/list')
 
 
 _G.cl:on('ready', function()
-	print(_G.cl.user.tag..' launched')
 	_G.cl:setGame {
 		type = 3,
-		name = ver
+		name = ver..' | '.._G.pref..'help'
 	}
 end)
