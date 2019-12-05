@@ -27,3 +27,11 @@ function nekos(msg, args)
 		}
 	}
 end
+_G.cl:on('messageCreate', function(msg)
+	local cont = msg.content
+        local args = cont:split(' ')
+        if msg.author.bot == true then return end
+        if args[1] == _G.pref..'img' then
+                nekos(msg, args)
+        end
+end)
