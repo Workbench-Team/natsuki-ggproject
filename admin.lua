@@ -5,11 +5,11 @@ function exec(msg, args)
 		msg.channel:broadcastTyping()
 		table.remove(args, 1)
 		local cmd = table.concat(args, ' ')
-		msg:reply('prbrain@sv1:~/natsuki$ '..cmd)
-		msg.channel:broadcastTyping()
 		local handle = io.popen(cmd)
 		local result = handle:read('*a')
-		msg:reply(result)
+		io.open('result.txt', 'w'):write(result):close()
+		local message = msg:reply { embed = { title = 'prbrain@sv1:~/natsuki$ '..cmd, description = result } }
+		if message == nil then msg:reply { embed = { title = 'Ошибка', description = 'Запрос слишком большой или не заканчивается' }, file = 'result.txt' } end
 		handle:close()
 	else
 		msg:reply(msg.author.mentionString..' необходимо иметь группу `admin` или `owner`.')
