@@ -1,5 +1,4 @@
 function exec(msg, args)
-	if msg.guild.id ~= '606961070212644894' then return end
 	local alwd_g = {['admin'] = true, ['owner'] = true}
 	local user_g = groups[msg.author.id]
 	if alwd_g[user_g] == true then
