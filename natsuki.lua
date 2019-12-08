@@ -1,6 +1,7 @@
 _G.disc = require('discordia')
 _G.cl = _G.disc.Client()
 _G.http = require('coro-http')
+_G.http.TIMEOUT = 10
 _G.qs = require('querystring')
 _G.json = require('json')
 _G.timer = require('timer')
