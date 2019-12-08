@@ -17,6 +17,7 @@ function help(msg)
 			{name=_G.pref..'say[d] <text>',value='Сказать <text>\nd - удалить ваше сообщение'},
 			{name=_G.pref..'fox',value='Картинки с лисичками :3'},
 			{name=_G.pref..'avatar [User]',value='Получить ссылку и изображение на аватарке'},
+			{name=_G.pref..'lhh',value='Lofi Hip Hop музыка'},
 		},
 		timestamp = _G.disc.Date():toISO('T', 'Z')
 	}
