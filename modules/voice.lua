@@ -1,4 +1,5 @@
 function lhh(msg, args)
+	if not msg.member then return end
 	local vc = msg.guild.connection
 	if vc then
 		local method = args[2]
