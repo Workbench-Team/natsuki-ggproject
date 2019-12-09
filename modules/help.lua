@@ -1,7 +1,7 @@
 function help(msg)
 	local table = {
 		title = '**Бот в разработке**',
-		description = '**[Ссылка на GitHub страницу](https://github.com/ProfessorBrain/natsuki)**',
+		description = '**[Ссылка на GitHub страницу](https://github.com/ProfessorBrain/natsuki)\n[Ссылка на приглашение бота](https://discordapp.com/oauth2/authorize?client_id=651411296050216975&scope=bot&permissions=0)**',
 		author = {
 			icon_url = msg.author.avatarURL,
 			name = msg.author.tag
