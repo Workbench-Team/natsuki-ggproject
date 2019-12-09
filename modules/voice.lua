@@ -65,6 +65,7 @@ end
 _G.cl:on('messageCreate', function(msg)
 	local cont = msg.content
 	local args = cont:split(' ')
+	if msg.author.bot == true then return end
 	if args[1] == _G.pref..'lhh' then
 		if msg.channelType == 1 or msg.channelType == 3 then return end
 		if args[2] then
