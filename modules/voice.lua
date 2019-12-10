@@ -20,7 +20,7 @@ function lhh(msg, args)
 					msg:reply{embed={description='Не удалось соединиться с сервером',color=13632027,footer={text='Requested by '..msg.author.tag,icon_url=msg.author.avatarURL},timestamp=_G.disc.Date():toISO('T', 'Z')}}
 				end
 			else
-				msg:reply(msg.author.mentionString..' неизвестная команда, '.._G.pref..'lff для просмотра доступных команд')
+				msg:reply(msg.author.mentionString..' неизвестная команда, '.._G.pref..'lhh для просмотра доступных команд')
 			end
 		end
 	else
