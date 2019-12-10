@@ -14,7 +14,7 @@ function lhh(msg, args)
 			elseif method == 'play' then
 				msg:reply{embed={description='Начинаю стримить Lofi hip hop музыку в канал '..vc.channel.name,color=8311585,footer={text='Requested by '..msg.author.tag,icon_url=msg.author.avatarURL},timestamp=_G.disc.Date():toISO('T', 'Z')}}
 				local suc, err = pcall(function()
-					return vc:playFFmpeg('http://sv1.ggproject.xyz:8000/lhh')
+					return vc:playFFmpeg('http://127.0.0.1:8000/lhh')
 				end)
 				if err == 0 then
 					msg:reply{embed={description='Не удалось соединиться с сервером',color=13632027,footer={text='Requested by '..msg.author.tag,icon_url=msg.author.avatarURL},timestamp=_G.disc.Date():toISO('T', 'Z')}}
@@ -45,7 +45,7 @@ function lhh(msg, args)
 					if vc then
 						msg:reply{embed={description='Начинаю стримить Lofi hip hop музыку в канал '..vc.channel.name,color=8311585,footer={text='Requested by '..msg.author.tag,icon_url=msg.author.avatarURL},timestamp=_G.disc.Date():toISO('T', 'Z')}}
 						local suc, err = pcall(function()
-							return vc:playFFmpeg('http://sv1.ggproject.xyz:8000/lhh')
+							return vc:playFFmpeg('http://127.0.0.1:8000/lhh')
 		                                end)
 						if err == 0 then
 							msg:reply{embed={description='Не удалось соединиться с сервером',color=13632027,footer={text='Requested by '..msg.author.tag,icon_url=msg.author.avatarURL},timestamp=_G.disc.Date():toISO('T', 'Z')}}
