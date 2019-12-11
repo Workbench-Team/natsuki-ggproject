@@ -5,4 +5,5 @@ return {
 	require('modules/voice'),
 	require('modules/fox'),
 	require('modules/avatar'),
+	require('modules/triggers'),
 }
