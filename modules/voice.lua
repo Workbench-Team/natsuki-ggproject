@@ -57,7 +57,7 @@ function lhh(msg, args)
 					msg:reply(msg.author.mentionString..' вы не находитесь в каком либо голосовом канале или у меня нет прав')
 				end
 			else
-				msg:reply(msg.author.mentionString..' неизвестная команда, '.._G.pref..'lff для просмотра доступных команд')
+				msg:reply(msg.author.mentionString..' неизвестная команда, '.._G.pref..'lhh для просмотра доступных команд')
 			end
 		end
 	end
