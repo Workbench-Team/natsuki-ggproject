@@ -3,6 +3,7 @@ function avatar(msg, args)
 		local id = string.gsub(args[2], '@', '')
 		id = string.gsub(id, '<', '')
 		id = string.gsub(id, '>', '')
+		id = string.gsub(id, '!', '')
 		local user = _G.cl:getUser(id)
 		if user then
 			msg:reply { embed = { description = '[Ссылка на изображение]('..user:getAvatarURL(1024)..')', image = { url = user:getAvatarURL(1024) } } }
