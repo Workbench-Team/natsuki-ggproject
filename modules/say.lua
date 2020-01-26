@@ -8,6 +8,7 @@ _G.cl:on('messageCreate', function(msg)
 	local cont = msg.content
         local args = cont:split(' ')
         if msg.author.bot == true then return end
+	if msg.channel == '660906542169849878' then return end
         if args[1] == _G.pref..'say' then
                 local d = false
 		say(msg, args, d)

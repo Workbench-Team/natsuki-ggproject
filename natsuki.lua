@@ -27,3 +27,15 @@ _G.cl:on('ready', function()
 		name = ver..' | '.._G.pref..'help'
 	}
 end)
+
+_G.cl:on('messageCreate',function(msg)
+	local logs = _G.cl:getChannel('661166664104148993')
+	if msg.channel.type == 1 or msg.channel.type == 3 then
+		logs:send{content='*'..msg.channel.name..'*\n**'..msg.author.tag..'** сказал:\n> '..msg.content, embed=msg.embed}
+		if msg.attachment then
+			for i,v in ipairs(msg.attachments) do
+				logs:send{content=v.url}
+			end
+		end
+	end
+end)

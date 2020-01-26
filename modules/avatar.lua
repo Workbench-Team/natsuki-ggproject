@@ -3,6 +3,7 @@ function avatar(msg, args)
 		local id = string.gsub(args[2], '@', '')
 		id = string.gsub(id, '<', '')
 		id = string.gsub(id, '>', '')
+		id = string.gsub(id, '!', '')
 		local user = _G.cl:getUser(id)
 		if user then
 			msg:reply { embed = { description = '[Ссылка на изображение]('..user:getAvatarURL(1024)..')', image = { url = user:getAvatarURL(1024) } } }
@@ -15,6 +16,7 @@ _G.cl:on('messageCreate', function(msg)
 	local cont = msg.content
 	local args = cont:split(' ')
 	if msg.author.bot == true then return end
+	if msg.channel == '660906542169849878' then return end
 	if args[1] == _G.pref..'avatar' then
 		avatar(msg, args)
 	end
