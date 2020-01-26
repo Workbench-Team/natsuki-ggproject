@@ -6,7 +6,7 @@ _G.qs = require('querystring')
 _G.json = require('json')
 _G.timer = require('timer')
 disc.extensions()
-_G.pref = '.'
+_G.pref = 'n/'
 _G.ver = '3.0 dev'
 
 
