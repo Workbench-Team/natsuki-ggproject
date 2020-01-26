@@ -6,4 +6,5 @@ return {
 	require('modules/fox'),
 	require('modules/avatar'),
 	require('modules/triggers'),
+	require('modules/ggappeals'),
 }

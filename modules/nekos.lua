@@ -31,7 +31,8 @@ _G.cl:on('messageCreate', function(msg)
 	local cont = msg.content
         local args = cont:split(' ')
         if msg.author.bot == true then return end
-        if args[1] == _G.pref..'img' then
+	if msg.channel == '660906542169849878' then return end
+        if args[1] == _G.pref..'nekos' then
                 nekos(msg, args)
         end
 end)

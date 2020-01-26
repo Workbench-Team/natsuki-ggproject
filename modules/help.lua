@@ -13,7 +13,7 @@ function help(msg)
 		color = 3586419,
 		fields = {
 			{name=_G.pref..'help',value='Выводит помощь по командам'},
-			{name=_G.pref..'img',value='NSFW и SFW картинки с сайта nekos.life'},
+			{name=_G.pref..'nekos',value='NSFW и SFW картинки с сайта nekos.life'},
 			{name=_G.pref..'say[d] <text>',value='Сказать <text>\nd - удалить ваше сообщение'},
 			{name=_G.pref..'fox',value='Картинки с лисичками :3'},
 			{name=_G.pref..'avatar [User]',value='Получить ссылку и изображение на аватарке'},
@@ -27,6 +27,7 @@ _G.cl:on('messageCreate', function(msg)
 	local cont = msg.content
         local args = cont:split(' ')
         if msg.author.bot == true then return end
+	if msg.channel == '660906542169849878' then return end
         if args[1] == _G.pref..'help' then
                 help(msg)
         end
