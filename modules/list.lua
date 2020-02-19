@@ -7,4 +7,5 @@ return {
 	require('modules/avatar'),
 	require('modules/triggers'),
 	require('modules/ggappeals'),
+	require('modules/qiwidonat'),
 }
