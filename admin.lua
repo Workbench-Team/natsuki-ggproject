@@ -16,11 +16,11 @@ function exec(msg, args)
 		msg:reply(msg.author.mentionString..' необходимо иметь группу `admin` или `owner`.')
 	end
 end
-_G.cl:on('messageCreate', function(msg) 
+cl:on('messageCreate', function(msg) 
 	local cont = msg.content
         local args = cont:split(' ')
         if msg.author.bot == true then return end
-        if args[1] == _G.pref..'!' then
+        if args[1] == pref..'!' then
                 exec(msg, args)
 	end
 end)

@@ -7,28 +7,28 @@ function help(msg)
 			name = msg.author.tag
 		},
 		footer = {
-			icon_url = _G.cl.user.avatarURL,
-			text = _G.cl.user.tag
+			icon_url = cl.user.avatarURL,
+			text = cl.user.tag
 		},
 		color = 3586419,
 		fields = {
-			{name=_G.pref..'help',value='Выводит помощь по командам'},
-			{name=_G.pref..'nekos',value='NSFW и SFW картинки с сайта nekos.life'},
-			{name=_G.pref..'say[d] <text>',value='Сказать <text>\nd - удалить ваше сообщение'},
-			{name=_G.pref..'fox',value='Картинки с лисичками :3'},
-			{name=_G.pref..'avatar [User]',value='Получить ссылку и изображение на аватарке'},
-			{name=_G.pref..'lhh',value='Lofi Hip Hop музыка'},
+			{name=pref..'help',value='Выводит помощь по командам'},
+			{name=pref..'nekos',value='NSFW и SFW картинки с сайта nekos.life'},
+			{name=pref..'say[d] <text>',value='Сказать <text>\nd - удалить ваше сообщение'},
+			{name=pref..'fox',value='Картинки с лисичками :3'},
+			{name=pref..'avatar [User]',value='Получить ссылку и изображение на аватарке'},
+			{name=pref..'lhh',value='Lofi Hip Hop музыка'},
 		},
-		timestamp = _G.disc.Date():toISO('T', 'Z')
+		timestamp = disc.Date():toISO('T', 'Z')
 	}
 	msg:reply { embed = table }
 end
-_G.cl:on('messageCreate', function(msg)
+cl:on('messageCreate', function(msg)
 	local cont = msg.content
         local args = cont:split(' ')
         if msg.author.bot == true then return end
 	if msg.channel == '660906542169849878' then return end
-        if args[1] == _G.pref..'help' then
+        if args[1] == pref..'help' then
                 help(msg)
         end
 end)

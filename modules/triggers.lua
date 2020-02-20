@@ -3,7 +3,7 @@ function trigger(msg, cont)
 	if triggers[cont] == nil then return end
 	msg:reply(triggers[cont])
 end
-_G.cl:on('messageCreate', function(msg)
+cl:on('messageCreate', function(msg)
 	local cont = msg.content
 	local args = cont:split(' ')
 	if msg.author.bot == true then return end

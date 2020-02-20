@@ -3,8 +3,8 @@ local channel = '660906542169849878'
 function appealsinfo(user, hash)
 end
 
-_G.cl:on('reactionAdd', function(react, userid)
-	local user = _G.cl:getUser(userid)
+cl:on('reactionAdd', function(react, userid)
+	local user = cl:getUser(userid)
 	local hash = react.emojiHash
 	if user.bot == true then
 		return
@@ -14,8 +14,8 @@ _G.cl:on('reactionAdd', function(react, userid)
 		react:delete(userid)
 	end
 end)
-_G.cl:on('reactionAddUncached', function(chnl, msgid, hash, userid)
-	local user = _G.cl:getUser(userid)
+cl:on('reactionAddUncached', function(chnl, msgid, hash, userid)
+	local user = cl:getUser(userid)
 	if user.bot == true then
 		return
 	end
@@ -25,7 +25,7 @@ _G.cl:on('reactionAddUncached', function(chnl, msgid, hash, userid)
 	end
 end)
 
-_G.cl:on('ready', function()
-	_G.cl:getChannel(channel):getMessages():forEach(function(msg) msg:delete() end)
-	_G.cl:getChannel(channel):send('***Будет доступно позже!***')
+cl:on('ready', function()
+--	cl:getChannel(channel):getMessages():forEach(function(msg) msg:delete() end)
+--	cl:getChannel(channel):send('***Будет доступно позже!***')
 end)

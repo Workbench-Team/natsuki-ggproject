@@ -7,10 +7,9 @@ _G.timer = require('timer')
 disc.extensions()
 _G.pref = 'n/'
 _G.ver = '3.0 dev'
+_G.config = json.decode(io.open("config.json", "r"):read("*a"))
 
-
-
-token = json.decode(io.open("config.json", "r"):read("*a"))["token"]
+token = config["token"]
 cl:run('Bot '..token)
 
 
@@ -18,7 +17,7 @@ cl:run('Bot '..token)
 require('admin')
 require('groups')
 require('modules/list')
-
+_G.mysql = require('./luvit-mysql/mysql')
 
 cl:on('ready', function()
 	cl:setGame {

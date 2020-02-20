@@ -1,0 +1,3 @@
+[submodule "luvit-mysql"]
+	path = luvit-mysql
+	url = https://github.com/kengonakajima/luvit-mysql
