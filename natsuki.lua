@@ -10,7 +10,7 @@ _G.ver = '3.0 dev'
 
 
 
-token = json.decode(io.open("config.json", "r"):read("*a"))["value"]
+token = json.decode(io.open("config.json", "r"):read("*a"))["token"]
 cl:run('Bot '..token)
 
 
