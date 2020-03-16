@@ -1,23 +1,30 @@
+_G.core = require("core")
 _G.disc = require('discordia')
 _G.cl = _G.disc.Client()
 _G.http = require('coro-http')
 _G.qs = require('querystring')
 _G.json = require('json')
 _G.timer = require('timer')
+
+--_G.mysql_driver = require("luasql.mysql")
+--_G.mysql_env = assert (driver.mysql())
+
+--_G.mysql = require('./luvit-mysql/mysql') --bye bye shit
+_G.mysql = require('./third_party/luajit_mysql.lua')
+require('./third_party/embed.lua')
+
+_G.uv = require('uv')
 disc.extensions()
+
 _G.pref = 'n/'
-_G.ver = '3.0 dev'
+_G.ver = '3.0.2.6 dev'
 _G.config = json.decode(io.open("config.json", "r"):read("*a"))
 
 token = config["token"]
 cl:run('Bot '..token)
 
-
-
-require('admin')
 require('groups')
 require('modules/list')
-_G.mysql = require('./luvit-mysql/mysql')
 
 cl:on('ready', function()
 	cl:setGame {

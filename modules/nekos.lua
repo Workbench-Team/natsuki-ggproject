@@ -1,6 +1,6 @@
-function nekos(msg, args)
+command_handler.register('nekos', 'NSFW и SFW картинки с сайта nekos.life', nil, false, function (msg, argv, args)
 	msg.channel:broadcastTyping()
-	local neko_type = args[2]
+	local neko_type = argv[2]
 	if neko_type == nil then msg:reply { embed = { description = "Укажите тег, доступные теги:\n`'femdom', 'tickle', 'classic', 'ngif', 'erofeet', 'meow', 'erok', 'poke', 'les', 'hololewd', 'lewdk', 'keta', 'feetg', 'nsfw_neko_gif', 'eroyuri', 'kiss', 'kuni', 'tits', 'pussy_jpg', 'cum_jpg', 'pussy', 'lewdkemo', 'lizard', 'slap', 'lewd', 'cum', 'cuddle', 'spank', 'smallboobs', 'goose', 'Random_hentai_gif', 'avatar', 'fox_girl', 'nsfw_avatar', 'hug', 'gecg', 'boobs', 'pat', 'feet', 'smug', 'kemonomimi', 'solog', 'holo', 'wallpaper', 'bj', 'woof', 'yuri', 'trap', 'anal', 'baka', 'blowjob', 'holoero', 'feed', 'neko', 'gasm', 'hentai', 'futanari', 'ero', 'solo', 'waifu', 'pwankg', 'eron', 'erokemo'`", color = 13632027, author = {name=msg.author.tag,icon_url=msg.author.avatarURL}, footer = {icon_url=cl.user.avatarURL,text=cl.user.tag}, timestamp = disc.Date():toISO('T', 'Z') } } return end
 	neko_type = string.gsub(neko_type, "'", '')
 	local data, body = http.request('GET', 'https://nekos.life/api/v2/img/'..neko_type)
@@ -26,13 +26,4 @@ function nekos(msg, args)
 			timestamp = disc.Date():toISO('T', 'Z')
 		}
 	}
-end
-cl:on('messageCreate', function(msg)
-	local cont = msg.content
-        local args = cont:split(' ')
-        if msg.author.bot == true then return end
-	if msg.channel == '660906542169849878' then return end
-        if args[1] == pref..'nekos' then
-                nekos(msg, args)
-        end
 end)

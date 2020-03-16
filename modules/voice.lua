@@ -1,8 +1,14 @@
-function lhh(msg, args)
+command_handler.register('lhh', 'Lofi Hip Hop музыка', nil, false, function (msg, argv, args)
+	if msg.channelType == 1 or msg.channelType == 3 then return end
+
+	if not args[2] then
+		msg:reply{embed={description=pref..'lhh - модуль воспроизведения Lofi hip hop музыки в любой голосовой канал\nКогда-нибудь этих команд будет больше\nДоступные команды:',fields={{name='join',value='Зайти в голосовой канал'},{name='leave',value='Покинуть голосовой канал'},{name='play',value='Начать воспроизведение музыки Lofi hip hop'},{name='stop',value='Остановить воспроизведение'},{name='Примеры исользования этих команд',value=pref..'lhh play - воспроизведёт музыку в канале, в котором бот находится или подключится и воспроизведёт там, где находится пользователь\n'..pref..'lhh leave - Бот остановит транслирование и покинет канал'}},footer={text='Requested by '..msg.author.tag,icon_url=msg.author.avatarURL},timestamp=disc.Date():toISO('T', 'Z'),color=14538918}}
+	end
+
 	if not msg.member then return end
 	local vc = msg.guild.connection
 	if vc then
-		local method = args[2]
+		local method = argv[2]
 		if method then
 			if method == 'leave' then
 				vc:stopStream()
@@ -24,7 +30,7 @@ function lhh(msg, args)
 			end
 		end
 	else
-		local method = args[2]
+		local method = argv[2]
 		if method then
 			if method == 'join' then
 				local chnl = msg.member.voiceChannel
@@ -59,20 +65,6 @@ function lhh(msg, args)
 			else
 				msg:reply(msg.author.mentionString..' неизвестная команда, '..pref..'lhh для просмотра доступных команд')
 			end
-		end
-	end
-end
-cl:on('messageCreate', function(msg)
-	local cont = msg.content
-	local args = cont:split(' ')
-	if msg.author.bot == true then return end
-	if msg.channel == '660906542169849878' then return end
-	if args[1] == pref..'lhh' then
-		if msg.channelType == 1 or msg.channelType == 3 then return end
-		if args[2] then
-			lhh(msg, args)
-		else
-			msg:reply{embed={description=pref..'lhh - модуль воспроизведения Lofi hip hop музыки в любой голосовой канал\nКогда-нибудь этих команд будет больше\nДоступные команды:',fields={{name='join',value='Зайти в голосовой канал'},{name='leave',value='Покинуть голосовой канал'},{name='play',value='Начать воспроизведение музыки Lofi hip hop'},{name='stop',value='Остановить воспроизведение'},{name='Примеры исользования этих команд',value=pref..'lhh play - воспроизведёт музыку в канале, в котором бот находится или подключится и воспроизведёт там, где находится пользователь\n'..pref..'lhh leave - Бот остановит транслирование и покинет канал'}},footer={text='Requested by '..msg.author.tag,icon_url=msg.author.avatarURL},timestamp=disc.Date():toISO('T', 'Z'),color=14538918}}
 		end
 	end
 end)

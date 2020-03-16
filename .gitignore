@@ -1,4 +1,5 @@
-config.json
-discordia.log
-gateway.json
-result.txt
+deps
+*.txt
+*.json
+*.log
+*.old

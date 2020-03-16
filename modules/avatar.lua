@@ -1,6 +1,6 @@
-function avatar(msg, args)
-	if args[2] then
-		local id = string.gsub(args[2], '@', '')
+command_handler.register('avatar', 'Получить ссылку и изображение на аватарке', nil, false, function (msg, argv, args)
+	if argv[2] then
+		local id = string.gsub(argv[2], '@', '')
 		id = string.gsub(id, '<', '')
 		id = string.gsub(id, '>', '')
 		id = string.gsub(id, '!', '')
@@ -10,15 +10,5 @@ function avatar(msg, args)
 		end
 	else
 		msg:reply { embed = { description = '[Ссылка на изображение]('..msg.author:getAvatarURL(1024)..')', image = { url = msg.author:getAvatarURL(1024) } } }
-	end
-end
-
-cl:on('messageCreate', function(msg)
-	local cont = msg.content
-	local args = cont:split(' ')
-	if msg.author.bot == true then return end
-	if msg.channel == '660906542169849878' then return end
-	if args[1] == pref..'avatar' then
-		avatar(msg, args)
 	end
 end)

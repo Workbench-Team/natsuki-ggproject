@@ -1,6 +1,7 @@
 local channel = '660906542169849878'
 
-function appealsinfo(user, hash)
+function appeal(user, hash)
+	
 end
 
 cl:on('reactionAdd', function(react, userid)
@@ -10,7 +11,7 @@ cl:on('reactionAdd', function(react, userid)
 		return
 	end
 	if react.message.channel.id == channel then
-		appealsinfo(user, hash)
+		appeal(user, hash)
 		react:delete(userid)
 	end
 end)
@@ -20,12 +21,19 @@ cl:on('reactionAddUncached', function(chnl, msgid, hash, userid)
 		return
 	end
 	if chnl.id == channel then
-		appealsinfo(user, hash)
+		appeal(user, hash)
 		chnl:getMessage(msgid):removeReaction(hash, userid)
 	end
 end)
 
 cl:on('ready', function()
 --	cl:getChannel(channel):getMessages():forEach(function(msg) msg:delete() end)
---	cl:getChannel(channel):send('***Будет доступно позже!***')
+--	cl:getChannel(channel):send{embed={title='title'}, content='content'}
+	local message = cl:getChannel(channel):getMessage('684798172098592849')
+	local embed = { title='Подробнее о системе обращений', description='Для начала нового обращения, вы можете нажать на соответствующую реакцию к этому сообщению\nПосле нажатия на реакцию вам будут прописаны правила, форма и команды для заполнения\nПравила обращений:', fields={{name='🇦', value='GG Events - заявление на администратора'}, {name='🇧', value='Жалоба на игрока/администратора'}, {name='🇨', value='Предложение чего-либо по сотрудничеству/серверу/мероприятию к GG Events и др.'}, }, color=8311585 }
+	message:setContent('')
+	message:setEmbed(embed)
+	message:addReaction('🇦')
+	message:addReaction('🇧')
+	message:addReaction('🇨')
 end)

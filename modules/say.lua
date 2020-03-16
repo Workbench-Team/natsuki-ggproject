@@ -1,19 +1,12 @@
-function say(msg, args, d)
-	if d == true then msg:delete() end
+command_handler.register('say', 'Сказать <text>', '<text>', false, function (msg, argv, args)
 	msg.channel:broadcastTyping()
-	table.remove(args, 1)
-	msg:reply(table.concat(args, ' '))
-end
-cl:on('messageCreate', function(msg)
-	local cont = msg.content
-        local args = cont:split(' ')
-        if msg.author.bot == true then return end
-	if msg.channel == '660906542169849878' then return end
-        if args[1] == pref..'say' then
-                local d = false
-		say(msg, args, d)
-        elseif args[1] == pref..'sayd' then
-		local d = true
-                say(msg, args, d)
-        end
+	table.remove(argv, 1)
+	msg:reply(table.concat(argv, ' '))
+end)
+
+command_handler.register('sayd', 'Сказать <text> и удалить ваше сообщение', '<text>', false, function (msg, argv, args)
+	msg.channel:broadcastTyping()
+	table.remove(argv, 1)
+	msg:reply(table.concat(argv, ' '))
+	msg:delete()
 end)
