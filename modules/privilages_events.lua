@@ -1,6 +1,6 @@
 privilage_preinit('events')
 
-command_handler.register('scpsleventsprivilage', 'Работа с привилегиями на scp:sl events', nil, true, function (msg, argv, args)
+command_handler.register('scpsleventsprivilage', 'Работа с привилегиями на scp:sl events', "list / set <user> <type> / delete <user>", true, function (msg, argv, args)
 	if argv[2] == "list" then msg.channel:send(privilage_list('events')) end
 
 	if argv[2] == "set" then

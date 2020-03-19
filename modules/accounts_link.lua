@@ -10,7 +10,7 @@ mysql_db:close()
 
 function account_set_link(userid, account_type, account)
 local mysql_db = mysql.connect(mysql_host, mysql_port, mysql_user, mysql_password, mysql_db_name)
-if account_type == "steam64id" then mysql_db:query( string.format("INSERT INTO discord_steam64id_link ( userid, account ) VALUES('%s','%s') ON DUPLICATE KEY UPDATE account = '%s'", userid, account, account) ) end
+if account_type == "steam64id" then mysql_db:query( string.format("INSERT INTO discord_steam64id_link ( userid, account ) VALUES('%s','%s') ON DUPLICATE KEY UPDATE account = '%s'", userid, mysql.escape(account), mysql.escape(account)) ) end
 mysql_db:close()
 end
 

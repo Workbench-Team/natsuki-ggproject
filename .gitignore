@@ -1,4 +1,5 @@
 deps
+*.patch
 *.txt
 *.json
 *.log

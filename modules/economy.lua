@@ -34,7 +34,7 @@ if result[1] == nil then return 0 end
 return result[1].money
 end
 
-shop_register_multiple('Печку', 'Печек', 'Govno x2', 0.01, donation_get_code_by_valute('RUB'), true, function (msg, count)
+shop_register_multiple('Печка', 'Печек', 'Govno x2', 0.01, donation_get_code_by_valute('RUB'), true, function (msg, count)
 	economy_insert_balance(msg.author.id, count)
 end)
 
@@ -99,15 +99,16 @@ local profit = (math.random(0, 500) > 100)
 
 local userid = msg.author.id
 
-local money = math.random(69, 768)
+local money = math.random(100, 400)
 
 if profit == true then
-	local embed = Embed:new(nil, string.format(work_text_profit[math.random(1, work_text_profit_count)], money, economy_smile), 3586419, {icon_url = cl.user.avatarURL,text = cl.user.tag}, {icon_url = msg.author.avatarURL,name = msg.author.tag})
-	msg.channel:send{embed = embed:get()} --(string.format(work_text_profit[math.random(1, work_text_profit_count)], money, economy_smile))
+	local embed = Embed:new(msg, nil, string.format(work_text_profit[math.random(1, work_text_profit_count)], money, economy_smile), 0x36B973)
+	msg.channel:send{embed = embed:get()}
 	economy_insert_balance(userid, money)
 	return
 else
-	msg.channel:send(string.format(work_text_bad[math.random(1, work_text_bad_count)], money, economy_smile))
+	local embed = Embed:new(msg, nil, string.format(work_text_bad[math.random(1, work_text_bad_count)], money, economy_smile), 0xFF0000)
+	msg.channel:send{embed = embed:get()}
 	economy_insert_balance(userid, money * -1)
 	return
 end
@@ -115,9 +116,8 @@ end
 
 function economy_money(msg, argv, args)
 local userid = msg.author.id
-local embed = Embed:new(nil, string.format('На счету %s %s', economy_get_balance(userid), economy_smile), 3586419, {icon_url = cl.user.avatarURL,text = cl.user.tag}, {icon_url = msg.author.avatarURL,name = msg.author.tag})
+local embed = Embed:new(msg, nil, string.format('На счету %s %s', economy_get_balance(userid), economy_smile), 0x36B973)
 msg.channel:send{embed = embed:get()}
-
 end
 
 command_handler.register('eco', 'Экономика', 'money / work', false, function (msg, argv, args)

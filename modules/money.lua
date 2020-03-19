@@ -87,7 +87,7 @@ if not donation_is_discord_id(comment) == false then
 	mysql_db:query( string.format("INSERT INTO donations ( thxid, amount, valute, comment, date ) VALUES('%s',%f,%i,'anon',now())", tranxid, amount, valute ))
 else
 	balance_insert(comment, amount, valute)
-	mysql_db:query( string.format("INSERT INTO donations ( thxid, amount, valute, comment, date ) VALUES('%s',%f,%i,'%s',now())", tranxid, amount, valute, comment ))
+	mysql_db:query( string.format("INSERT INTO donations ( thxid, amount, valute, comment, date ) VALUES('%s',%f,%i,'%s',now())", tranxid, amount, valute, mysql.escape(comment) ))
 end
 mysql_db:close()
 end
@@ -109,12 +109,8 @@ end
 
 command_handler.register('balance', 'Показывает баланс', '<user> or anon', false, function (msg, argv, args)
 	if argv[2] == 'anon' then
-		local donation_msg = string.format('Анонимно задоначено:\n')
-		donation_msg = string.format('%s%.2f RUB\n', donation_msg, balance_get('anon', 643))
-		donation_msg = string.format('%s%.2f EUR\n', donation_msg, balance_get('anon', 978))
-		donation_msg = string.format('%s%.2f USD\n', donation_msg, balance_get('anon', 840))
-		donation_msg = string.format('%s%.2f KZT\n', donation_msg, balance_get('anon', 398))
-		msg.channel:send(donation_msg)
+		local embed = Embed:new(msg, 'Анонимно задоначено:', string.format('%.2f RUB\n%.2f EUR\n%.2f USD\n%.2f KZT\n', balance_get('anon', 643), balance_get('anon', 978), balance_get('anon', 840), balance_get('anon', 398)), 0x36B973)
+		msg.channel:send{embed = embed:get()}
 		return
 	end
 
@@ -124,12 +120,8 @@ command_handler.register('balance', 'Показывает баланс', '<user>
 		id = string.gsub(id, '>', '')
 		id = string.gsub(id, '!', '')
 		local userid = cl:getUser(id).id
-		local donation_msg = string.format('Баланс пользователя:\n')
-		donation_msg = string.format('%s%.2f RUB\n', donation_msg, balance_get(userid, 643))
-		donation_msg = string.format('%s%.2f EUR\n', donation_msg, balance_get(userid, 978))
-		donation_msg = string.format('%s%.2f USD\n', donation_msg, balance_get(userid, 840))
-		donation_msg = string.format('%s%.2f KZT\n', donation_msg, balance_get(userid, 398))
-		msg.channel:send(donation_msg)
+		local embed = Embed:new(msg, 'Баланс пользователя:', string.format('%.2f RUB\n%.2f EUR\n%.2f USD\n%.2f KZT', balance_get(userid, 643), balance_get(userid, 978), balance_get(userid, 840), balance_get(userid, 398)), 0x36B973)
+		msg.channel:send{embed = embed:get()}
 		return
 	end
 
@@ -137,31 +129,46 @@ command_handler.register('balance', 'Показывает баланс', '<user>
 	local donation_msg = string.format('Ваш комментарий для доната `%s`\n', userid)
 	donation_msg = string.format('%s%s', donation_msg, 'Для доната перейдите по ссылке, в комментариях укажите __**ТОЛЬКО**__ эти цифры без лишних пробелов, символов и слов, то есть только эти цифры, в ином случае донат будет анонимным.\nhttps://qiwi.com/n/PRBRAIN\n')
 	donation_msg = string.format('%s%s', donation_msg, 'Ваш баланс:\n')
-	donation_msg = string.format('%s%.2f RUB\n', donation_msg, balance_get(userid, 643))
-	donation_msg = string.format('%s%.2f EUR\n', donation_msg, balance_get(userid, 978))
-	donation_msg = string.format('%s%.2f USD\n', donation_msg, balance_get(userid, 840))
-	donation_msg = string.format('%s%.2f KZT\n', donation_msg, balance_get(userid, 398))
-	msg.channel:send(donation_msg)
+	local embed = Embed:new(msg, nil, string.format('%.2f RUB\n%.2f EUR\n%.2f USD\n%.2f KZT\nДля пополнения баланса, перейдите по ссылке и введите `%s` (Для каждого эти цифры уникальны) в поле с комментарием и ничего больше (ни пробелов, ни других слов и символов) https://qiwi.com/n/PRBRAIN', balance_get(userid, 643), balance_get(userid, 978), balance_get(userid, 840), balance_get(userid, 398), userid), 0x36B973)
+	msg.channel:send{embed = embed:get()}
 end)
 
 shop_list = {}
 shop_count = 1
 
 function shop_buy(msg, userid, id, count)
-	if shop_list[id] == nil then msg.channel:send('Неизвестный id для магазина') return end
---	if count % 1 == 0 then msg.channel:send('Колличество не может быть числом с плавующей точкой по стандарту IEEE 754') return end
+	count = math.floor(count)
+	id = math.floor(id)
+
+	if shop_list[id] == nil then
+		local embed = embed:new(msg, nil, 'Неизвестный id для магазина', 0xFF0000)
+		msg.channel:send{embed = embed:get()}
+		return
+	end
 	if count == nil then count = 1 end
 
-	if count > 1 and shop_list[id].amount == false then msg.channel:send('Невозможно применить колличество для этого id') return end
+	if count > 1 and shop_list[id].amount == false then 
+		local embed = Embed:new(msg, nil, 'Этот придмет можно купить только поштучно', 0xFF0000)
+		msg.channel:send{embed = embed:get()}
+		return 
+	end
 
 	local item_valute_code = shop_list[id].valute
 	local balance_valute = balance_get(userid, item_valute_code)
 	local cost = (shop_list[id].cost * count)
 
-	if cost > balance_valute then msg.channel:send(string.format("Недостаточно средств для покупки!\nУ вас - %s %s\nНе хватает - %s %s", balance_valute, donation_get_valute_by_code(item_valute_code), cost - balance_valute, donation_get_valute_by_code(item_valute_code))) return end
+	if cost > balance_valute then
+		local embed = Embed:new(msg, nil, string.format("Недостаточно средств для покупки!\nУ вас - %s %s\nНе хватает - %s %s", balance_valute, donation_get_valute_by_code(item_valute_code), cost - balance_valute, donation_get_valute_by_code(item_valute_code)), 0xFF0000)
+		msg.channel:send{embed = embed:get()}
+		return 
+	end
 
 	local result = shop_list[id].callback(msg, count)
-	if result == false then msg.channel:send("Обработчик покупки вернул false") return end
+	if result == false then
+		local embed = Embed:new(msg, nil, "Обработчик покупки вернул false", 0xFF0000)
+		msg.channel:send{embed = embed:get()}
+		return 
+	end
 
 	local balance_new = balance_valute - cost
 
@@ -169,36 +176,22 @@ function shop_buy(msg, userid, id, count)
 	purchase_insert( userid, cost, shop_list[id].valute, "" )
 
 	if count == 1 then
-	msg.channel:send(string.format("Вы купили %s за %s %s", shop_list[id].name, shop_list[id].cost, donation_get_valute_by_code(shop_list[id].valute)))
+		local embed = Embed:new(msg, nil, string.format("Вы купили %s за %s %s", shop_list[id].name, shop_list[id].cost, donation_get_valute_by_code(shop_list[id].valute)), 0x36B973)
+		msg.channel:send{embed = embed:get()}
 	else
-	msg.channel:send(string.format("Вы купили %s %s за %s %s", count, shop_list[id].name_multiple, cost, donation_get_valute_by_code(shop_list[id].valute)))
+		local embed = Embed:new(msg, nil, string.format("Вы купили %s %s за %s %s", count, shop_list[id].name_multiple, cost, donation_get_valute_by_code(shop_list[id].valute)), 0x36B973)
+		msg.channel:send{embed = embed:get()}
 	end
 end
 
 function shop_l(msg)
-		local table = {
-		title = '**Магазин**',
-		description = '**я хз даже нужно ли тут что то сделать TODO: убрать это дерьмо ?**',
-		author = {
-			icon_url = msg.author.avatarURL,
-			name = msg.author.tag
-		},
-		footer = {
-			icon_url = cl.user.avatarURL,
-			text = cl.user.tag
-		},
-		color = 3586419,
-		fields = {},
-		timestamp = disc.Date():toISO('T', 'Z')
-	}
+	local embed = Embed:new(msg, '**Магазин**', nil, 0x36B973)
 
 	for i = 1,#shop_list do
-	table.fields[i] = {}
-	table.fields[i]['name'] = shop_list[i].name
-	table.fields[i]['value'] = string.format('%s %s\nid = %s', shop_list[i].cost, donation_get_valute_by_code(shop_list[i].valute), i)
-end
+		embed:push_field(shop_list[i].name, string.format('%s %s\nid = %s', shop_list[i].cost, donation_get_valute_by_code(shop_list[i].valute), i))
+	end
 
-	msg:reply { embed = table }
+	msg:reply { embed = embed:get() }
 end
 
 function shop_register(name, description, cost, valute, callback)
@@ -223,10 +216,6 @@ function shop_register_multiple(name, name_multiple, description, cost, valute, 
 	shop_list[shop_count]['callback'] = callback 
 	shop_count = shop_count + 1
 end
-
-shop_register_multiple('Говно', 'Говна', 'Аниме говно', 0, donation_get_code_by_valute('RUB'), true, function (msg, count)
-	return true
-end)
 
 command_handler.register('shop', 'Самый убогий магазин который можно было написать для бота в дискорде', 'list / info <id> / buy <id> <count>', false, function (msg, argv, args)
 	local userid = msg.author.id

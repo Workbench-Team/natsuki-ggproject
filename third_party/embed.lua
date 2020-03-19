@@ -1,6 +1,7 @@
--- Mini Addon For Discrordia to work with embed by Mr0maks
+-- Code for Natsuki to work with Discordia embed by Mr0maks
 
 local discordia = disc --require('discordia')
+local client = cl
 
 local core = require("core")
 local Object = core.Object
@@ -17,12 +18,18 @@ function author:get()
 	return self.table
 end
 
-function Embed:initialize(title, description, color, footer, author, fields )
+function Embed:initialize(msg, title, description, color, fields )
   self.table = {
 		title = title,
 		description = description,
-		author = author,
-		footer = footer,
+		author = {
+			icon_url = msg.author.avatarURL,
+			name = msg.author.tag
+		},
+		footer = {
+			icon_url = cl.user.avatarURL,
+			text = cl.user.tag
+		},
 		color = color,
 		fields = fields,
 		timestamp = discordia.Date():toISO('T', 'Z')
