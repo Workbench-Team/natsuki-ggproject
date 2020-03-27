@@ -14,5 +14,6 @@ return {
 	require('modules/ggappeals'),
 	require('modules/qiwidonat'),
 	require('modules/accounts_link'),
---	require('modules/test')
+--	require('modules/test'),
+	require('modules/subnews'),
 }

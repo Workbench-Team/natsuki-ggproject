@@ -17,7 +17,7 @@ _G.uv = require('uv')
 disc.extensions()
 
 _G.pref = 'n/'
-_G.ver = '3.0.2.6 dev'
+_G.ver = '3.0.2.7 dev'
 _G.config = json.decode(io.open("config.json", "r"):read("*a"))
 
 token = config["token"]
