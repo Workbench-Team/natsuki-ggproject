@@ -6,11 +6,10 @@ local logs = '607240980923416576'
 function createappeals(msg)
 	msg.channel:broadcastTyping()
 	local types = {'eventsadmin', 'report', 'offering', 'unban', 'reportbug'}
-	local type = for k, v in pairs(types) do
+	local type = nil
+	for k,v in pairs(types) do
 		if msg.content == v then
-			return v
-		else
-			return nil
+			type = v
 		end
 	end
 	if type == nil then local temp = msg:reply(msg.author.mentionString..' неправильно указан тип обращения `'..msg.content..'`. Пожалуйста, прочитайте информацию выше') timer.sleep(10000) temp:delete() return end
@@ -31,7 +30,7 @@ function createappeals(msg)
 		['unban'] = '```Markdown\n# Форма подачи заявки на разбан/размут:\n1. Ваш ник в игре (если в игре)\n2. Ник администратора, то есть кем выдано\n3. Причина выдачи администратором\n4. Почему мы должны вас разбанить/размутить?\n5. Доказательства (если нужны)```',
 		['reportbug'] = '```md\n# Форма для заполнения:\n1. Какую дыру или баг вы нашли и как можно это воспроизвести?\n2. Когда вы его нашли и кто о нём знал?\n3. Если знаете, предложите, как можно это исправить\n```',
 	}
-	local embed = Embed:new(msg, 'Меню, правила и форма обращения', 'Для того, чтобы закрыть обращение, поставьте реакцию ❌. Закрывайте обращение только тогда, когда оно действительно закончено и больше не требует обсуждений, либо если в нём не соблюдены требуемые условия и правила. Ниже будет написана форма обращения и его тип', 4886754, {name=type, value=infos[type]})
+	local embed = Embed:new(msg, 'Меню, правила и форма обращения', 'Для того, чтобы закрыть обращение, поставьте реакцию ❌. Закрывайте обращение только тогда, когда оно действительно закончено и больше не требует обсуждений, либо если в нём не соблюдены требуемые условия и правила. Ниже будет написана форма обращения и его тип', 4886754, {{name=type, value=infos[type]}})
 	local appealmenu = appeal:send{embed=embed:get()}
 	appealmenu:pin()
 	appealmenu:addReaction('❌')
@@ -39,6 +38,7 @@ function createappeals(msg)
 	local temp = msg:reply(msg.author.mentionString..' ваше обращение создано в канале <#'..appeal.id..'> (кликабельно)')
 	timer.sleep(10000)
 	temp:delete()
+	msg:delete()
 end
 
 function closeappeals(user, hash, chnl)
@@ -49,27 +49,28 @@ function closeappeals(user, hash, chnl)
 end
 
 cl:on('messageCreate', function(msg)
-	if msg.channel.id == channel then
+	if msg.channel.id == channel and msg.author ~= cl.user then
 		createappeals(msg)
 	end
 end)
 
 cl:on('reactionAdd', function(react, userid)
-	if react.message.channel.category.id == category then
+	if react.message.channel.category.id == category and userid ~= cl.user.id then
 		local user = cl:getUser(userid)
 		local chnl = react.message.channel
 		closeappeals(user, react.emojiHash, chnl)
 	end
 end)
 cl:on('reactionAddUncached', function(chnl, msgid, hash, userid)
-	if chnl.category.id == category then
+	if chnl.category.id == category and userid ~= cl.user.id then
 		local user = cl:getUser(userid)
 		closeappeals(user, hash, chnl)
+	end
 end)
 
 cl:on('ready', function()
 	logs = cl:getChannel(logs)
-	cl:getChannel(channel):getMessages():forEach(function(msg) if msg.id ~= message then msg:delete() end)
+	cl:getChannel(channel):getMessages():forEach(function(msg) if msg.id ~= message then msg:delete() end end)
 --	cl:getChannel(channel):send{embed={title='title'}, content='content'}
 	local message = cl:getChannel(channel):getMessage(message)
 	local embed = { title='**Подробнее о системе обращений**', description='**Для начала нового обращения, вы можете написать один из типов обращений ниже\nВ самих, уже созданных, обращениях (отдельный текстовый канал) вы найдёте все требования, команды и форму, которые напишу вам я\nТакже в обращении будет меню для управления обращением, через которое вы сможете закрыть обращение (безвозвратно удалит канал с обращением)\nПравила обращений:\n1. Создавайте только одно обращение с одной темой, не создавайте их по несколько раз, одного обращения вполне достаточно\n2. Если ответа не поступит в течение дня, вы можете пингануть 1 раз администрацию, которая требуется для проверки обращения\n3. Если обращение не принадлежит вам, пожалуйста, не трогайте и не закрывайте его без разрешения\n4. Пожалуйста, после создания обращения, напишите его суть/содержание/причину в течение часа, иначе оно будет закрыто без спроса**', fields={{name='eventsadmin', value='GG Events - заявление на администратора'}, {name='report', value='Жалоба на игрока/администратора'}, {name='offering', value='Предложение чего-либо по сотрудничеству/серверу/мероприятию к GG Events и др.'}, {name='unban', value='Запрос разбана/размута'}, {name='reportbug', value='Сообщить о дыре или баге'}, }, color=16098851 }
