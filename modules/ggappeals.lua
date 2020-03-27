@@ -1,5 +1,5 @@
 local channel = '660906542169849878'
-local message = '684798172098592849'
+local message = '693027550578081855'
 local category = '627248436525400084'
 local logs = '607240980923416576'
 
@@ -62,6 +62,7 @@ cl:on('messageCreate', function(msg)
 end)
 
 cl:on('reactionAdd', function(react, userid)
+	if not react.message.channel.category then return end
 	if react.message.channel.category.id == category and userid ~= cl.user.id then
 		local user = cl:getUser(userid)
 		local chnl = react.message.channel
@@ -69,6 +70,7 @@ cl:on('reactionAdd', function(react, userid)
 	end
 end)
 cl:on('reactionAddUncached', function(chnl, msgid, hash, userid)
+	if not channel.category then return end
 	if chnl.category.id == category and userid ~= cl.user.id then
 		local user = cl:getUser(userid)
 		closeappeals(user, hash, chnl)
