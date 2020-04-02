@@ -137,6 +137,10 @@ shop_list = {}
 shop_count = 1
 
 function shop_buy(msg, userid, id, count)
+	if type(count) ~= 'number' then
+		msg:reply(msg.author.mentionString..' количество товара должно быть записано цифрой')
+		return
+	end
 	count = math.floor(count)
 	id = math.floor(id)
 

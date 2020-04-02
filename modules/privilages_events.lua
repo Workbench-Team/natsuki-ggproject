@@ -10,6 +10,7 @@ command_handler.register('scpsleventsprivilage', 'Работа с привиле
 		id = string.gsub(id, '!', '')
 		local userid = cl:getUser(id).id
 		privilage_set('events', userid, argv[4])
+		msg:reply('Теперь '..cl:getUser(id).tag..' имеет '..argv[4])
 	end
 
 	if argv[2] == "delete" then
@@ -19,6 +20,7 @@ command_handler.register('scpsleventsprivilage', 'Работа с привиле
 		id = string.gsub(id, '!', '')
 		local userid = cl:getUser(id).id
 		privilage_delete('events', userid)
+		msg:reply('Удалены все роли с '..cl:getUser(id).tag)
 	end
 
 end)

@@ -36,13 +36,13 @@ end
 
 command_handler.register('accountlink', 'Связывает userid Discord с другими порталами в бд проекта. Типы для связывания: Steam, писать в форме steam64id', '<type> <id>', false, function (msg, argv, args)
 	local userid = msg.author.id
-	if not argv[2] or not account_is_account_id(argv[2]) then msg.channel:send("Нету типа для связывания!") return end
-	if not argv[3] then msg.channel:send("Нету айди для связывания!") return end
+	if not argv[2] or not account_is_account_id(argv[2]) then msg.channel:send("Нету типа для связывания! Доступные типы: steam64id") return end
+	if not argv[3] then msg.channel:send("Нету айди для связывания! Для типа steam64id нужно указать ваш уникальный идентификатор steam аккаунта используя сайт http://steamid.io") return end
 	if account_in_db(userid, argv[2]) then msg.channel:send("TODO") end
 
 	account_set_link(userid, argv[2], argv[3])
 
-	local output = string.format('Для этого аккаунта %s = %s\n', argv[2], argv[3])
+	local output = string.format('К вашему аккаунту привязан %s с таким уникальным идентификатором %s\n', argv[2], argv[3])
 	msg.channel:send(output)
 end)
 
@@ -57,7 +57,7 @@ command_handler.register('adminaccountlink', 'Связывает userid Discord 
 
 	account_set_link(userid, argv[3], argv[4])
 
-	local output = string.format('Для %s %s = %s\n', userid, argv[3], argv[4])
+	local output = string.format('Для %s привязан %s с уникальным идентификатором %s\n', userid, argv[3], argv[4])
 	msg.channel:send(output)
 end)
 

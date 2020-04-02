@@ -226,7 +226,7 @@ local mysql_connect =
    end      
 
 local mysql_escape =
-   function( self, orig )
+   function( orig )
       if not orig then return nil end
       local strsz = string.len(orig) * 2 + 1 + 1
       local cdata = ffi.new( "char[" .. strsz .. "]")
