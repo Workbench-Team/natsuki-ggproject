@@ -30,7 +30,7 @@ function createappeals(msg)
 		['unban'] = '```Markdown\n# Форма подачи заявки на разбан/размут:\n1. Ваш ник в игре (если в игре)\n2. Ник администратора, то есть кем выдано\n3. Причина выдачи администратором\n4. Почему мы должны вас разбанить/размутить?\n5. Доказательства (если нужны)```',
 		['reportbug'] = '```md\n# Форма для заполнения:\n1. Какую дыру или баг вы нашли и как можно это воспроизвести?\n2. Когда вы его нашли и кто о нём знал?\n3. Если знаете, предложите, как можно это исправить\n```',
 	}
-	local embed = Embed:new(msg, 'Меню, правила и форма обращения', 'Для того, чтобы закрыть обращение, поставьте реакцию ❌. Закрывайте обращение только тогда, когда оно действительно закончено и больше не требует обсуждений, либо если в нём не соблюдены требуемые условия и правила. Ниже будет написана форма обращения и его тип', 4886754, {{name=type, value=infos[type]}})
+	local embed = Embed:new(msg, 'Меню, правила и форма обращения', 'Для того, чтобы закрыть обращение, поставьте реакцию ❌ (или напишите ❌, если не закрывается с помощью реакции). Закрывайте обращение только тогда, когда оно действительно закончено и больше не требует обсуждений, либо если в нём не соблюдены требуемые условия и правила. Ниже будет написана форма обращения и его тип', 4886754, {{name=type, value=infos[type]}})
 	local appealmenu, err = appeal:send{embed=embed:get()}
 	if not appealmenu then
 		local temp = msg:reply(msg.author.mentionString..' к сожалению произошла техническая ошибка во время создания обращения. Попробуйте в следующий раз')
@@ -48,16 +48,21 @@ function createappeals(msg)
 	msg:delete()
 end
 
-function closeappeals(user, hash, chnl)
-	if hash == '❌' then
-		chnl:delete()
-		logs:send(user.tag..' закрыл обращение '..chnl.name)
-	end
+function closeappeals(user, chnl)
+	chnl:delete()
+	logs:send(user.tag..' закрыл обращение '..chnl.name)
 end
 
 cl:on('messageCreate', function(msg)
 	if msg.channel.id == channel and msg.author ~= cl.user then
 		createappeals(msg)
+	end
+	if msg.channel.category then
+		if msg.channel.category == category then
+			if msg.content == '❌' then
+				closeappeals(msg.author, msg.channel)
+			end
+		end
 	end
 end)
 
@@ -66,14 +71,16 @@ cl:on('reactionAdd', function(react, userid)
 	if react.message.channel.category.id == category and userid ~= cl.user.id then
 		local user = cl:getUser(userid)
 		local chnl = react.message.channel
-		closeappeals(user, react.emojiHash, chnl)
+		if react.emojiHash ~= '❌' then return end
+		closeappeals(user, chnl)
 	end
 end)
 cl:on('reactionAddUncached', function(chnl, msgid, hash, userid)
 	if not channel.category then return end
 	if chnl.category.id == category and userid ~= cl.user.id then
 		local user = cl:getUser(userid)
-		closeappeals(user, hash, chnl)
+		if hash ~= '❌' then return end
+		closeappeals(user, chnl)
 	end
 end)
 
