@@ -24,15 +24,17 @@ function setupSubs()
 	local ggevents = cl:getRole('650782142955257869')
 	local ggdm = cl:getRole('650782578441322496')
 	local ggcinema = cl:getRole('650782777519898634')
+	local ggorange = cl:getRole('695229555409158206')
 	local scpsl = cl:getRole('650782827507351552')
-    local pb = cl:getRole('677146477994311691')
-    local msg = channel:getMessage('650793780005437441')
-	msg:setContent('В этом канале вы можете подписаться на различные новости.\nДля этого есть соответствующие реакции ниже:\n🇦 - <@&'..ggevents.id..'>\n🇧 - <@&'..ggdm.id..'>\n🇨 - <@&'..ggcinema.id..'>\n🇩 - <@&'..scpsl.id..'>\n🇪 - <@&'..pb.id..'>')
+	local pb = cl:getRole('677146477994311691')
+	local msg = channel:getMessage('650793780005437441')
+	msg:setContent('В этом канале вы можете подписаться на различные новости.\nДля этого есть соответствующие реакции ниже:\n🇦 - <@&'..ggevents.id..'>\n🇧 - <@&'..ggdm.id..'>\n🇨 - <@&'..ggcinema.id..'>\n🇩 - <@&'..scpsl.id..'>\n🇪 - <@&'..pb.id..'>\n🇫 - <@&'..ggorange.id..'>')
 	msg:addReaction('🇦')
 	msg:addReaction('🇧')
 	msg:addReaction('🇨')
 	msg:addReaction('🇩')
 	msg:addReaction('🇪')
+	msg:addReaction('🇫')
 end
 
 function newsSubs(hash, userid)
@@ -41,6 +43,7 @@ function newsSubs(hash, userid)
         local ggevents = '650782142955257869'
         local ggdm = '650782578441322496'
         local ggcinema = '650782777519898634'
+	local ggorange = '695229555409158206'
         local scpsl = '650782827507351552'
 	local pb = '677146477994311691'
 	local member = cl:getGuild('606961070212644894'):getMember(userid)
@@ -59,6 +62,8 @@ function newsSubs(hash, userid)
 	elseif hash == '🇪' then
 		member:addRole(pb)
 --		chat:send(member.user.mentionString..' подписался на новости Профессора Brain')
+	elseif hash == '🇫' then
+		member:addRole(ggorange)
 	end
 end
 
@@ -68,6 +73,7 @@ function newsRemoveSubs(hash, userid)
         local ggevents = '650782142955257869'
         local ggdm = '650782578441322496'
         local ggcinema = '650782777519898634'
+	local ggorange = '695229555409158206'
         local scpsl = '650782827507351552'
 	local pb = '677146477994311691'
         local member = cl:getGuild('606961070212644894'):getMember(userid)
@@ -86,6 +92,8 @@ function newsRemoveSubs(hash, userid)
 	elseif hash == '🇪' then
 		member:removeRole(pb)
 --		chat:send(member.user.mentionString..' отписался от новостей Профессора Brain')
+	elseif hash == '🇫' then
+		member:removeRole(ggorange)
         end
 end
 

@@ -58,7 +58,7 @@ cl:on('messageCreate', function(msg)
 		createappeals(msg)
 	end
 	if msg.channel.category then
-		if msg.channel.category == category then
+		if msg.channel.category.id == category then
 			if msg.content == '❌' then
 				closeappeals(msg.author, msg.channel)
 			end
