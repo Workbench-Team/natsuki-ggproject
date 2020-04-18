@@ -42,6 +42,12 @@ function createappeals(msg)
 	appealmenu:pin()
 	appealmenu:addReaction('❌')
 	appeal:getPermissionOverwriteFor(msg.member):allowPermissions(0x00000400)
+	if type == 'eventsadmin' then
+		appeal:getPermissionOverwriteFor(cl:getRole('628295268911284225')):delete()
+		appeal:getPermissionOverwriteFor(cl:getRole('639003693227704331')):delete()
+		appeal:getPermissionOverwriteFor(cl:getRole('627161428989837312')):delete()
+		appeal:getPermissionOverwriteFor(cl:getRole('627161097182642176')):delete()
+	end
 	local temp = msg:reply(msg.author.mentionString..' ваше обращение создано в канале <#'..appeal.id..'> (кликабельно)')
 	timer.sleep(10000)
 	temp:delete()
