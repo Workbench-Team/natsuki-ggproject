@@ -121,7 +121,7 @@ command_handler.register('balance', 'Показывает баланс', '<user>
 		id = string.gsub(id, '!', '')
 		if not cl:getUser(id) then return end
 		local userid = cl:getUser(id).id
-		local embed = Embed:new(msg, 'Баланс пользователя:', string.format('%.2f RUB\n%.2f EUR\n%.2f USD\n%.2f KZT', balance_get(userid, 643), balance_get(userid, 978), balance_get(userid, 840), balance_get(userid, 398)), 0x36B973)
+		local embed = Embed:new(msg, 'Баланс пользователя '..cl:getUser(id).tag..':', string.format('%.2f RUB\n%.2f EUR\n%.2f USD\n%.2f KZT', balance_get(userid, 643), balance_get(userid, 978), balance_get(userid, 840), balance_get(userid, 398)), 0x36B973)
 		msg.channel:send{embed = embed:get()}
 		return
 	end
