@@ -16,4 +16,5 @@ return {
 	require('modules/accounts_link'),
 --	require('modules/test'),
 	require('modules/subnews'),
+	require('modules/ggevents_schedule'),
 }
