@@ -231,6 +231,7 @@ command_handler.register('shop', 'Самый убогий магазин кот�
 end)
 
 command_handler.register('setbalance', 'Установить баланс для пользователя', '<user> <valute> <amount>', true, function (msg, argv, args)
+	if not argv[2] then return end
 	local id = string.gsub(argv[2], '@', '')
 	id = string.gsub(id, '<', '')
 	id = string.gsub(id, '>', '')
