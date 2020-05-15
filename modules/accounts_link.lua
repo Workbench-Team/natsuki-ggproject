@@ -61,3 +61,27 @@ command_handler.register('adminaccountlink', 'Связывает userid Discord 
 	msg.channel:send(output)
 end)
 
+command_handler.register('getlinkedaccount', 'Выводит ваши привязанные id. Доступные типы: steam64id', '<type> [mention]', false, function(msg, argv, args)
+	if not argv[2] then
+		msg:reply('Не указан тип аккаунта. Доступные: steam64id')
+		return
+	elseif argv[2] ~= 'steam64id' then
+		msg:reply('Неправильный тип аккаунта. Доступные: steam64id')
+		return
+	end
+
+	if msg.mentionedUsers then
+		local id = string.gsub(argv[3], '@', '')
+	        id = string.gsub(id, '<', '')
+	        id = string.gsub(id, '>', '')
+	        id = string.gsub(id, '!', '')
+	        local userid = cl:getUser(id).id
+		local result = account_get_link(userid, argv[2], nil)
+		msg:reply(string.format('steam64id пользователя %s: %s', cl:getUser(userid).tag, result))
+		return
+	end
+
+	local result = account_get_link(msg.author.id, argv[2], nil)
+
+	msg:reply(string.format('Ваш steam64id: %s', result))
+end)

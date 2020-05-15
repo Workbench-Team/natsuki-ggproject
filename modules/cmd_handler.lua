@@ -26,7 +26,7 @@ local function register(command, help, help_args, is_admin, cb)
 	command_list[pref..command]['is_admin'] = is_admin
 	command_helplist[command_count] = {}
 	command_helplist[command_count]['command'] = pref..command
-	if not help_args == nil then
+	if type(help_args) == 'string' then
 	command_helplist[command_count]['command_help'] = string.format('%s %s', pref..command, help_args)
 	else
 	command_helplist[command_count]['command_help'] = pref..command

@@ -238,5 +238,6 @@ command_handler.register('setbalance', 'Установить баланс для
 	id = string.gsub(id, '!', '')
 	local userid = cl:getUser(id).id
 	balance_set(userid, argv[4], donation_get_code_by_valute(argv[3]))
+	msg:reply(string.format('Баланс пользователя %s установлен на %s %s', cl:getUser(id).tag, argv[4], donation_get_code_by_valute(argv[3])))
 	return
 end)

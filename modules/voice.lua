@@ -1,4 +1,4 @@
-command_handler.register('lhh', 'Lofi Hip Hop музыка', nil, false, function (msg, argv, args)
+command_handler.register('lhh', 'Lofi Hip Hop музыка (Deprecated)', nil, false, function (msg, argv, args)
 	if msg.channelType == 1 or msg.channelType == 3 then return end
 
 	if not args[2] then

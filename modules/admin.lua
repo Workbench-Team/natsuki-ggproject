@@ -1,4 +1,4 @@
-command_handler.register('!', 'выполняет комманду', nil, true, function (msg, argv, args)
+command_handler.register('!', 'выполняет комманду', '<команда shell>', true, function (msg, argv, args)
 	msg.channel:broadcastTyping()
 	table.remove(argv, 1)
 	local cmd = table.concat(argv, ' ')

@@ -17,4 +17,5 @@ return {
 --	require('modules/test'),
 	require('modules/subnews'),
 	require('modules/ggevents_schedule'),
+	require('modules/cats'),
 }
