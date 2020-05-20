@@ -1,4 +1,5 @@
 command_handler.register('!', 'выполняет комманду', '<команда shell>', true, function (msg, argv, args)
+	if msg.guild.id ~= server then return end
 	msg.channel:broadcastTyping()
 	table.remove(argv, 1)
 	local cmd = table.concat(argv, ' ')

@@ -131,7 +131,7 @@ command_handler.register('balance', 'Показывает баланс', '<user>
 	local donation_msg = string.format('Ваш комментарий для доната `%s`\n', userid)
 	donation_msg = string.format('%s%s', donation_msg, 'Для доната перейдите по ссылке, в комментариях укажите __**ТОЛЬКО**__ эти цифры без лишних пробелов, символов и слов, то есть только эти цифры, в ином случае донат будет анонимным.\nhttps://qiwi.com/n/PRBRAIN\n')
 	donation_msg = string.format('%s%s', donation_msg, 'Ваш баланс:\n')
-	local embed = Embed:new(msg, nil, string.format('%.2f RUB\n%.2f EUR\n%.2f USD\n%.2f KZT\nДля пополнения баланса, перейдите по ссылке и введите `%s` (Для каждого эти цифры уникальны) в поле с комментарием и ничего больше (ни пробелов, ни других слов и символов) https://qiwi.com/n/PRBRAIN', balance_get(userid, 643), balance_get(userid, 978), balance_get(userid, 840), balance_get(userid, 398), userid), 0x36B973)
+	local embed = Embed:new(msg, nil, string.format('%.2f RUB\n%.2f EUR\n%.2f USD\n%.2f KZT\nДля пополнения баланса, перейдите по ссылке и введите `%s` (Для каждого эти цифры уникальны) в поле с комментарием и ничего больше (ни пробелов, ни других слов и символов) ||https://qiwi.com/n/PRBRAIN|| **__(если вы прочитали условие для пополнения, нажмите по закрашенной тёмным цветом кнопке, чтобы увидеть и открыть ссылку для пополнения)__**', balance_get(userid, 643), balance_get(userid, 978), balance_get(userid, 840), balance_get(userid, 398), userid), 0x36B973)
 	msg.channel:send{embed = embed:get()}
 end)
 
