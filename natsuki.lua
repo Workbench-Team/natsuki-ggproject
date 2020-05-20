@@ -5,6 +5,7 @@ _G.http = require('coro-http')
 _G.qs = require('querystring')
 _G.json = require('json')
 _G.timer = require('timer')
+_G.server = '606961070212644894'
 
 --_G.mysql_driver = require("luasql.mysql")
 --_G.mysql_env = assert (driver.mysql())
@@ -31,7 +32,6 @@ cl:on('ready', function()
 		type = 3,
 		name = ver..' | '..pref..'help'
 	}
-	cl.guilds:forEach(function(guild) if guild.id ~= '606961070212644894' then guild:leave() end end)
 end)
 
 cl:on('messageCreate',function(msg)

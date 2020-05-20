@@ -42,6 +42,7 @@ end
 
 --command_handler.register('accountlink', 'Связывает userid Discord с другими порталами в бд проекта. Типы для связывания: Steam, писать в форме steam64id', '<type> <id>', false, function (msg, argv, args)
 command_handler.register('accountlink', 'Связывает userid Discord с другими порталами в бд проекта. Типы для связывания: Steam, писать в форме steam64id', '<id>', false, function (msg, argv, args)
+	if msg.guild.id ~= server then return end
 	local userid = msg.author.id
 --	if not argv[2] or not account_is_account_id(argv[2]) then msg.channel:send("Нету типа для связывания! Доступные типы: steam64id") return end
 	if not argv[2] then msg.channel:send("Нету айди для связывания! Для типа steam64id нужно указать ваш уникальный идентификатор steam аккаунта используя сайт http://steamid.io") return end
@@ -55,6 +56,7 @@ command_handler.register('accountlink', 'Связывает userid Discord с д
 end)
 
 command_handler.register('adminaccountlink', 'Связывает userid Discord с другими порталами в бд проекта', nil, true, function (msg, argv, args)
+	if msg.guild.id ~= server then return end
 	local id = string.gsub(argv[2], '@', '')
 	id = string.gsub(id, '<', '')
 	id = string.gsub(id, '>', '')
@@ -73,6 +75,7 @@ command_handler.register('adminaccountlink', 'Связывает userid Discord 
 end)
 
 command_handler.register('getlinkedaccount', 'Выводит ваши привязанные id. Доступные типы: steam64id', '<type> [mention]', false, function(msg, argv, args)
+	if msg.guild.id ~= server then return end
 --	if not argv[2] then
 --		msg:reply('Не указан тип аккаунта. Доступные: steam64id')
 --		return
@@ -102,6 +105,7 @@ command_handler.register('getlinkedaccount', 'Выводит ваши привя
 end)
 
 command_handler.register('unlink', 'Отвязывание привязанного аккаунта. Доступные типы: steam64id', nil, false, function(msg, argv, args)
+	if msg.guild.id ~= server then return end
 	account_del_link(userid, 'steam64id')
 	msg:reply(string.format('От вашего аккаунта был отвязан steam64id'))
 end)

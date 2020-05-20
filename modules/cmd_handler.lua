@@ -42,7 +42,7 @@ end
 _G.command_handler['register'] = register
 
 command_handler.register('help', 'Выводит это сообщение', nil, false, function (msg, argv, args)
-	local embed = Embed:new(msg, '**Бот в разработке**', '**[Ссылка на GitHub страницу](https://github.com/ProfessorBrain/natsuki)\n[Ссылка на приглашение бота](https://discordapp.com/oauth2/authorize?client_id=651411296050216975&scope=bot&permissions=8192)**', 0x36B973)
+	local embed = Embed:new(msg, '**Бот в разработке**', '**[Ссылка на GitHub страницу](https://github.com/ProfessorBrain/natsuki)\n[Ссылка на приглашение бота](https://discordapp.com/oauth2/authorize?client_id=617013309341827132&scope=bot&permissions=8192)**', 0x36B973)
 
 for i = 1,#command_helplist do
 	embed:push_field(command_helplist[i].command_help, command_helplist[i].help)

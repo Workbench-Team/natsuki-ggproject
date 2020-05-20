@@ -108,6 +108,7 @@ function donation_new(amount,valute,comment,tranxid,date)
 end
 
 command_handler.register('balance', 'Показывает баланс', '<user> or anon', false, function (msg, argv, args)
+	if msg.guild.id ~= server then return end
 	if argv[2] == 'anon' then
 		local embed = Embed:new(msg, 'Анонимно задоначено:', string.format('%.2f RUB\n%.2f EUR\n%.2f USD\n%.2f KZT\n', balance_get('anon', 643), balance_get('anon', 978), balance_get('anon', 840), balance_get('anon', 398)), 0x36B973)
 		msg.channel:send{embed = embed:get()}
@@ -223,6 +224,7 @@ function shop_register_multiple(name, name_multiple, description, cost, valute, 
 end
 
 command_handler.register('shop', 'Самый убогий магазин который можно было написать для бота в дискорде', 'list / info <id> / buy <id> <count>', false, function (msg, argv, args)
+	if msg.guild.id ~= server then return end
 	local userid = msg.author.id
 	if argv[2] == nil then 	msg.channel:send('Недостаточно аргументов') return end
 	if argv[2] == 'list' then shop_l(msg) return end
@@ -231,6 +233,7 @@ command_handler.register('shop', 'Самый убогий магазин кот�
 end)
 
 command_handler.register('setbalance', 'Установить баланс для пользователя', '<user> <valute> <amount>', true, function (msg, argv, args)
+	if msg.guild.id ~= server then return end
 	if not argv[2] then return end
 	local id = string.gsub(argv[2], '@', '')
 	id = string.gsub(id, '<', '')

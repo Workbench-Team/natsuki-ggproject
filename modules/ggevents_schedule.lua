@@ -1,6 +1,7 @@
 local read_quotes_format = ' "([^"]+)"(.-)$'
 
 command_handler.register('planevent', 'Запланировать мероприятие в расписание', '"Название мероприятия" "Описание мероприятия или ссылка на него в списке мероприятий" "YYYY-MM-DD HH:MM:SS" по UTC (+00:00) времени', false, function(msg, argv, args)
+	if msg.guild.id ~= server then return end
 	local allowedroles = {"607233166524022784", "681120189974052953", "640160188254388240", "628295268911284225"}
 	local allowed = false
 	for k, v in pairs(allowedroles) do

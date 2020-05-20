@@ -4,6 +4,7 @@ command_handler.register('scpsleventsprivilage', 'Работа с привиле
 	if argv[2] == "list" then msg.channel:send(privilage_list('events')) end
 
 	if argv[2] == "set" then
+		if msg.guild.id ~= server then return end
 		local id = string.gsub(argv[3], '@', '')
 		id = string.gsub(id, '<', '')
 		id = string.gsub(id, '>', '')
@@ -14,6 +15,7 @@ command_handler.register('scpsleventsprivilage', 'Работа с привиле
 	end
 
 	if argv[2] == "delete" then
+		if msg.guild.id ~= server then return end
 		local id = string.gsub(argv[3], '@', '')
 		id = string.gsub(id, '<', '')
 		id = string.gsub(id, '>', '')
