@@ -18,7 +18,6 @@ _G.uv = require('uv')
 disc.extensions()
 
 _G.pref = 'n/'
-_G.ver = '3.0.2.9 dev'
 _G.config = json.decode(io.open("config.json", "r"):read("*a"))
 
 token = config["token"]
@@ -30,7 +29,7 @@ require('modules/list')
 cl:on('ready', function()
 	cl:setGame {
 		type = 3,
-		name = ver..' | '..pref..'help'
+		name = pref..'help | under dev'
 	}
 end)
 
