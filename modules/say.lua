@@ -2,8 +2,8 @@ command_handler.register('say', 'Сказать <text>', '<text>', false, functi
 	msg.channel:broadcastTyping()
 	table.remove(argv, 1)
 	for k, v in pairs(argv) do
-		string.gsub(argv, '@everyone', 'everyone')
-		string.gsub(argv, '@here', 'here')
+		string.gsub(v, '@everyone', 'everyone')
+		string.gsub(v, '@here', 'here')
 	end
 	msg:reply(table.concat(argv, ' '))
 end)
@@ -12,8 +12,8 @@ command_handler.register('sayd', 'Сказать <text> и удалить ваш
 	msg.channel:broadcastTyping()
 	table.remove(argv, 1)
 	for k, v in pairs(argv) do
-		string.gsub(argv, '@everyone', 'everyone')
-		string.gsub(argv, '@here', 'here')
+		string.gsub(v, '@everyone', 'everyone')
+		string.gsub(v, '@here', 'here')
 	end
 	msg:reply(table.concat(argv, ' '))
 	msg:delete()
