@@ -38,7 +38,7 @@ cl:on('messageCreate',function(msg)
 	if msg.channel.type == 1 or msg.channel.type == 3 then
 		local cont = msg.content
 		string.gsub(cont, '@everyone', 'everyone')
-		string.gsub(cont '@here', 'here')
+		string.gsub(cont, '@here', 'here')
 		logs:send{content='*'..msg.channel.name..'*\n**'..msg.author.tag..'** сказал:\n> '..cont, embed=msg.embed}
 		if msg.attachment then
 			for i,v in ipairs(msg.attachments) do
