@@ -54,6 +54,7 @@ http_backend_register('account/get', function (http_json)
 	if not is_account_type(account_type) then return http_responce_error_json( string.format("invalid type %s", account_type) ) end
 
 	local result = account_get_link(userid, account_type)
+	if result == nil then return http_responce_error_json("no account linked with userid") end
 return http_responce_ok_json(result)
 end)
 
