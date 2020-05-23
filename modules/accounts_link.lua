@@ -74,7 +74,8 @@ command_handler.register('adminaccountlink', 'Связывает userid Discord 
 	msg.channel:send(output)
 end)
 
-command_handler.register('getlinkedaccount', 'Выводит ваши привязанные id. Доступные типы: steam64id', '<type> [mention]', false, function(msg, argv, args)
+--command_handler.register('getlinkedaccount', 'Выводит ваши привязанные id. Доступные типы: steam64id', '<type> [mention]', false, function(msg, argv, args)
+command_handler.register('getlinkedaccount', 'Выводит ваши привязанные id. Доступные типы: steam64id', '[mention]', false, function(msg, argv, args)
 	if msg.guild.id ~= server then return end
 --	if not argv[2] then
 --		msg:reply('Не указан тип аккаунта. Доступные: steam64id')
@@ -86,7 +87,7 @@ command_handler.register('getlinkedaccount', 'Выводит ваши привя
 
 --	if argv[3] then
 	if argv[2] then
-		local id = string.gsub(argv[3], '@', '')
+		local id = string.gsub(argv[2], '@', '')
 	        id = string.gsub(id, '<', '')
 	        id = string.gsub(id, '>', '')
 	        id = string.gsub(id, '!', '')
