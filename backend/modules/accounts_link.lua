@@ -1,3 +1,5 @@
+local mysql = require('third_party/luajit_mysql')
+
 local mysql_host = config.get('mysql_db_host')
 local mysql_port = config.get('mysql_db_port')
 local mysql_user = config.get('mysql_db_user')
