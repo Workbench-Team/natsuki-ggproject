@@ -39,7 +39,7 @@ cl:on('messageCreate',function(msg)
 		local cont = msg.content
 		string.gsub(cont, '@everyone', 'everyone')
 		string.gsub(cont, '@here', 'here')
-		logs:send{content='*'..msg.channel.name..'*\n**'..msg.author.tag..'** сказал:\n> '..cont, embed=msg.embed}
+		logs:send{content='*'..msg.channel.name..'*\n**'..msg.author.tag..'** сказал:\n> '..cont..'\nID канала: '..msg.channel.id..'\nID сообщения: '..msg.id, embed=msg.embed}
 		if msg.attachment then
 			for i,v in ipairs(msg.attachments) do
 				logs:send{content=v.url}
