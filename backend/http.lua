@@ -55,4 +55,4 @@ return http_emitter:listeners(head.path)[1](body_json)
 end)
 
 require('modules/exec')
-require('modules/account_link')
+require('modules/accounts_link')

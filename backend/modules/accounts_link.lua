@@ -1,8 +1,8 @@
-local mysql_host = config['mysql_db_host']
-local mysql_port = config['mysql_db_port']
-local mysql_user = config['mysql_db_user']
-local mysql_password = config['mysql_db_password']
-local mysql_db_name = config['mysql_db_name']
+local mysql_host = config.get('mysql_db_host')
+local mysql_port = config.get('mysql_db_port')
+local mysql_user = config.get('mysql_db_user')
+local mysql_password = config.get('mysql_db_password')
+local mysql_db_name = config.get('mysql_db_name')
 
 local mysql_db = mysql.connect( mysql_host, mysql_port, mysql_user, mysql_password, mysql_db_name)
 mysql_db:query( 'CREATE TABLE IF NOT EXISTS discord_steam64id_link(userid VARCHAR(255) PRIMARY KEY, account VARCHAR(255) NOT NULL)')
