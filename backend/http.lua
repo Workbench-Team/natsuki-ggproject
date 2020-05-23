@@ -45,6 +45,8 @@ if not (head.method == 'POST') then return http_responce_error_json("Only POST r
 
 local body_json = json.decode(body)
 
+if body_json == nil then return http_responce_error_json("Bad json") end
+
 if not http_is_api_token(body_json.token) then return http_responce_error_json("Bad token") end
 
 if http_emitter:listeners(head.path) == 0 then return http_responce_error_json("No handlers for this path") end 
@@ -53,3 +55,4 @@ return http_emitter:listeners(head.path)[1](body_json)
 end)
 
 require('modules/exec')
+require('modules/account_link')
