@@ -23,6 +23,9 @@ _G.config = json.decode(io.open("config.json", "r"):read("*a"))
 token = config["token"]
 cl:run('Bot '..token)
 
+_G.backend_token = config["backend_token"]
+_G.backend_url = config["backend_url"]
+
 require('groups')
 require('modules/list')
 
@@ -31,6 +34,7 @@ cl:on('ready', function()
 		type = 3,
 		name = pref..'help | under dev'
 	}
+	cl:setStatus('dnd')
 end)
 
 cl:on('messageCreate',function(msg)
