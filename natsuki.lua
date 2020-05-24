@@ -34,7 +34,7 @@ cl:on('ready', function()
 		type = 3,
 		name = pref..'help | under dev'
 	}
-	cl:setStatus('dnd')
+	cl:setStatus('online')
 end)
 
 cl:on('messageCreate',function(msg)
