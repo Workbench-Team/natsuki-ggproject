@@ -18,4 +18,5 @@ return {
 	require('modules/subnews'),
 	require('modules/ggevents_schedule'),
 	require('modules/cats'),
+	require('modules/dog'),
 }
