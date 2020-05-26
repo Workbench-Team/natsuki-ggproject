@@ -1,12 +1,13 @@
-local mysql_host = config['mysql_db_host']
-local mysql_port = config['mysql_db_port']
-local mysql_user = config['mysql_db_user']
-local mysql_password = config['mysql_db_password']
-local mysql_db_name = config['mysql_db_name']
+local mysql = require('third_party/luajit_mysql')
 
-local economy_curse_in = config['economy_curse_in']
-local economy_curse_out = config['economy_curse_out']
-local economy_smile = config['economy_smile']
+local mysql_host = config.get('mysql_db_host')
+local mysql_port = config.get('mysql_db_port')
+local mysql_user = config.get('mysql_db_user')
+local mysql_password = config.get('mysql_db_password')
+local mysql_db_name = config.get('mysql_db_name')
+
+local economy_curse_in = config.get('economy').economy_curse_in
+local economy_curse_out = config.get('economy').economy_curse_out
 
 local mysql_db = mysql.connect(mysql_host, mysql_port, mysql_user, mysql_password, mysql_db_name)
 mysql_db:query('CREATE TABLE IF NOT EXISTS economy_balance ( userid VARCHAR(255) PRIMARY KEY, money INT NOT NULL );')

@@ -35,46 +35,45 @@ local function is_account_type(account_type)
 	return false
 end
 
-http_backend_register('account/link', function (http_json)
+http_backend_register('account/link', function (res, http_json)
 	local userid = http_json.userid
 	local account = http_json.account
 	local account_type = http_json.type
 
-	if not is_account_type(account_type) then return http_responce_error_json( string.format("invalid type %s", account_type) ) end
+	if not is_account_type(account_type) then return http_response_error_json(res, string.format("invalid type %s", account_type) ) end
 
 	local result = account_link(userid, account_type, account)
-
-return http_responce_ok_json("ok")
+	http_response_ok_json(res, "ok")
 end)
 
-http_backend_register('account/get', function (http_json)
+http_backend_register('account/get', function (res, http_json)
 	local userid = http_json.userid
 	local account_type = http_json.type
 
-	if not is_account_type(account_type) then return http_responce_error_json( string.format("invalid type %s", account_type) ) end
+	if not is_account_type(account_type) then return http_response_error_json(res, string.format("invalid type %s", account_type) ) end
 
 	local result = account_get_link(userid, account_type)
-	if result == nil then return http_responce_error_json("no account linked with userid") end
-return http_responce_ok_json(result)
+	if result == nil then return http_response_error_json(res,"no account linked with userid") end
+	http_response_ok_json(res, result)
 end)
 
-http_backend_register('account/unlink', function (http_json)
+http_backend_register('account/unlink', function (res, http_json)
 	local userid = http_json.userid
 	local account_type = http_json.type
 
-	if not is_account_type(account_type) then return http_responce_error_json( string.format("invalid type %s", account_type) ) end
+	if not is_account_type(account_type) then return http_response_error_json(res, string.format("invalid type %s", account_type) ) end
 
 	account_unlink(userid, account_type)
-return http_responce_ok_json("ok")
+	http_response_ok_json(res, "ok")
 end)
 
-http_backend_register('account/linked', function (http_json)
+http_backend_register('account/linked', function (res, http_json)
 	local userid = http_json.userid
 	local account = http_json.account
 	local account_type = http_json.type
 
-	if not is_account_type(account_type) then return http_responce_error_json( string.format("invalid type %s", account_type) ) end
+	if not is_account_type(account_type) then return http_response_error_json(res, string.format("invalid type %s", account_type) ) end
 
 	local result = not account_get_link(userid, account_type, account) == nil
-return http_responce_ok_json(result)
+	http_response_ok_json(res, result)
 end)

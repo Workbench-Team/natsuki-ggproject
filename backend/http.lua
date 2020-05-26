@@ -1,5 +1,5 @@
 _G.core = require("core")
-_G.http = require('coro-http')
+_G.http = require('http')
 _G.json = require('json')
 _G.config = require('./config')
 
@@ -9,18 +9,22 @@ local listen_port = config.get("listen_port")
 local tokens = config.get("tokens")
 local http_emitter = Emitter:new()
 
-if listen_ip == nil then listen_ip = "0.0.0.0" end
-if listen_port == nil then listen_port = 8080 end 
+listen_port = listen_port or 8080
 
-_G.http_responce_error_json = function (err_str)
-	local err_table = {error = err_str}
-	local json_str = json.encode(err_table)
-	return { code = 200, {"Server", "GG Project Backend v 0.1"}, {"Content-Type", "application/json"}, {"Content-Length", #json_str + 1}, }, json_str.."\n"
+_G.http_response_error_json = function (res, err_str)
+	local json_str = json.encode({error = err_str})
+	res:setHeader("Content-Type", "application/json")
+	res:setHeader("Content-Length", #json_str)
+	res:write(json_str)
+	res:finish()
 end
 
-_G.http_responce_ok_json = function (data)
+_G.http_response_ok_json = function (res, data)
 	local json_str = json.encode({data = data})
-	return { code = 200, {"Server", "GG Project Backend v 0.1"}, {"Content-Type", "application/json"}, {"Content-Length", #json_str + 1}, }, json_str.."\n"
+	res:setHeader("Content-Type", "application/json")
+	res:setHeader("Content-Length", #json_str)
+	res:write(json_str)
+	res:finish()
 end
 
 local function http_is_api_token(str_token)
@@ -36,23 +40,40 @@ _G.http_backend_register = function (path, cb)
 end
 
 http_backend_register('ping', function (http_json)
-return http_responce_ok_json("Have a very safe day.")
+return http_response_ok_json("Have a very safe day.")
 end)
 
-http.createServer(listen_ip, listen_port, function (head, body)
+function onRequest (req, res)
 
-if not (head.method == 'POST') then return http_responce_error_json("Only POST requests") end
+if not (req.method == 'POST') then http_response_error_json(res, "Only POST requests") res:finish() end
 
-local body_json = json.decode(body)
+local chunks = {}
+local length = 0
 
-if body_json == nil then return http_responce_error_json("Bad json") end
+local api_url = 
 
-if not http_is_api_token(body_json.token) then return http_responce_error_json("Bad token") end
-
-if http_emitter:listeners(head.path) == 0 then return http_responce_error_json("No handlers for this path") end 
-
-return http_emitter:listeners(head.path)[1](body_json)
+req:on('data', function (chunk)
+	p({url = req.url, request=chunk})
+	length = length + 1
+	chunks[length] = chunk
 end)
+
+req:on('end', function ()
+    local body = table.concat(chunks, "")
+
+    local body_json = json.decode(body)
+
+	if body_json == nil then http_response_error_json(res, "Bad json") res:finish() end
+
+	if not http_is_api_token(body_json.token) then http_response_error_json(res, "Bad token") res:finish() end
+
+	if http_emitter:listeners(req.url)[1] ~= nil then http_emitter:listeners(req.url)[1](res, body_json) else http_response_error_json(res, "No handlers for this path") end
+	res:finish()
+end)
+end
+
+http.createServer(onRequest):listen(listen_port)
 
 require('modules/exec')
 require('modules/accounts_link')
+require('modules/privilages')

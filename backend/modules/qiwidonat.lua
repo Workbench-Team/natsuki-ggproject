@@ -1,5 +1,12 @@
 local qiwi_hook_id = config["qiwi_hook_id"]
 
+local http_callback = nil;
+
+http_backend_register('qiwi/set_callback', function (http_json)
+	local server = http_json.callback
+	return http_responce_ok_json("ok")
+end
+
 http.createServer("0.0.0.0", 8080, function (head, body)
 --p(body)
 
