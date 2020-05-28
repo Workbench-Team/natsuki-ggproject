@@ -1,4 +1,3 @@
-local data = {["token"] = backend_token}
 local method = 'account/'
 
 function account_set_link(userid, account_type, account)
