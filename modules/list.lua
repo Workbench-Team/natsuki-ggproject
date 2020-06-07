@@ -19,4 +19,5 @@ return {
 	require('modules/ggevents_schedule'),
 	require('modules/cats'),
 	require('modules/dog'),
+	require('modules/cleardata'),
 }

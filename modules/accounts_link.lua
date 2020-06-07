@@ -10,6 +10,7 @@ function account_set_link(userid, account_type, account)
 	local data, body = http.request('POST', backend_url..method, nil, data)
 	if not body then return false end
 	local result = json.decode(body)["data"]
+	cleardata()
 	return result
 end
 
@@ -22,6 +23,7 @@ function account_get_link(userid, account_type)
 	local data, body = http.request('POST', backend_url..method, nil, data)
 	if not body then return false end
 	local result = json.decode(body)["data"]
+	cleardata()
 	return result
 end
 
@@ -34,6 +36,7 @@ function account_del_link(userid, account_type)
 	local data, body = http.request('POST', backend_url..method, nil, data)
 	if not body then return false end
 	local result = json.decode(body)["data"]
+	cleardata()
 	return result
 end
 

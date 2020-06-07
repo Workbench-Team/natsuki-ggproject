@@ -1,7 +1,7 @@
 command_handler.register('chillmusic', 'Lofi Hip Hop/Chillhop/Electro/Melodic Dubstep музыка', nil, false, function (msg, argv, args)
 	if msg.channelType == 1 or msg.channelType == 3 then return end
 
-	if not args[2] then
+	if not argv[2] then
 		msg:reply{embed={description=pref..'chillmusic - модуль воспроизведения Lofi Hip Hop/Chill/Electro/Melodic Dubstep музыки, транслируемой по ссылке http://icecast.ggproject.xyz:8000/chill в любой голосовой канал\nДоступные команды:',fields={{name='join',value='Зайти в голосовой канал'},{name='leave',value='Покинуть голосовой канал'},{name='play',value='Начать воспроизведение музыки'},{name='stop',value='Остановить воспроизведение'},{name='Примеры исользования этих команд',value=pref..'chillmusic play - воспроизведёт музыку в канале, в котором бот находится или подключится и воспроизведёт там, где находится пользователь\n'..pref..'chillmusic leave - Бот остановит транслирование и покинет канал'}},footer={text='Requested by '..msg.author.tag,icon_url=msg.author.avatarURL},timestamp=disc.Date():toISO('T', 'Z'),color=14538918}}
 	end
 

@@ -25,6 +25,8 @@ cl:run('Bot '..token)
 
 _G.backend_token = config["backend_token"]
 _G.backend_url = config["backend_url"]
+_G.data = {["token"] = backend_token}
+_G.data_backup = {["token"] = backend_token}
 
 require('groups')
 require('modules/list')

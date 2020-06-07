@@ -27,14 +27,16 @@ function setupSubs()
 	local ggorange = cl:getRole('695229555409158206')
 	local scpsl = cl:getRole('650782827507351552')
 	local pb = cl:getRole('677146477994311691')
+	local ggma = cl:getRole('719330770677923840')
 	local msg = channel:getMessage('650793780005437441')
-	msg:setContent('В этом канале вы можете подписаться на различные новости.\nДля этого есть соответствующие реакции ниже:\n🇦 - <@&'..ggevents.id..'>\n🇧 - <@&'..ggdm.id..'>\n🇨 - <@&'..ggcinema.id..'>\n🇩 - <@&'..scpsl.id..'>\n🇪 - <@&'..pb.id..'>\n🇫 - <@&'..ggorange.id..'>')
+	msg:setContent('В этом канале вы можете подписаться на различные новости.\nДля этого есть соответствующие реакции ниже:\n🇦 - <@&'..ggevents.id..'>\n🇧 - <@&'..ggdm.id..'>\n🇨 - <@&'..ggcinema.id..'>\n🇩 - <@&'..scpsl.id..'>\n🇪 - <@&'..pb.id..'>\n🇫 - <@&'..ggorange.id..'>\n🇬 - <@&'..ggma.id..'>')
 	msg:addReaction('🇦')
 	msg:addReaction('🇧')
 	msg:addReaction('🇨')
 	msg:addReaction('🇩')
 	msg:addReaction('🇪')
 	msg:addReaction('🇫')
+	msg:addReaction('🇬')
 end
 
 function newsSubs(hash, userid)
@@ -46,6 +48,7 @@ function newsSubs(hash, userid)
 	local ggorange = '695229555409158206'
         local scpsl = '650782827507351552'
 	local pb = '677146477994311691'
+	local ggma = '719330770677923840'
 	local member = cl:getGuild('606961070212644894'):getMember(userid)
         if hash == '🇦' then
 		member:addRole(ggevents)
@@ -64,6 +67,8 @@ function newsSubs(hash, userid)
 --		chat:send(member.user.mentionString..' подписался на новости Профессора Brain')
 	elseif hash == '🇫' then
 		member:addRole(ggorange)
+	elseif hash == '🇬' then
+		member:addRole(ggma)
 	end
 end
 
@@ -76,6 +81,7 @@ function newsRemoveSubs(hash, userid)
 	local ggorange = '695229555409158206'
         local scpsl = '650782827507351552'
 	local pb = '677146477994311691'
+	local ggma = '719330770677923840'
         local member = cl:getGuild('606961070212644894'):getMember(userid)
         if hash == '🇦' then
                 member:removeRole(ggevents)
@@ -94,6 +100,8 @@ function newsRemoveSubs(hash, userid)
 --		chat:send(member.user.mentionString..' отписался от новостей Профессора Brain')
 	elseif hash == '🇫' then
 		member:removeRole(ggorange)
+	elseif hash == '🇬' then
+		member:removeRole(ggma)
         end
 end
 

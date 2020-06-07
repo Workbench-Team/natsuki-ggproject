@@ -13,18 +13,18 @@ listen_port = listen_port or 8080
 
 _G.http_response_error_json = function (res, err_str)
 	local json_str = json.encode({error = err_str})
-	res:setHeader("Content-Type", "application/json")
-	res:setHeader("Content-Length", #json_str)
-	res:write(json_str)
-	res:finish()
+--	res:setHeader("Content-Type", "application/json")
+--	res:setHeader("Content-Length", #json_str)
+	res:write(err_str)
+--	res:finish()
 end
 
 _G.http_response_ok_json = function (res, data)
 	local json_str = json.encode({data = data})
-	res:setHeader("Content-Type", "application/json")
-	res:setHeader("Content-Length", #json_str)
+--	res:setHeader("Content-Type", "application/json")
+--	res:setHeader("Content-Length", #json_str)
 	res:write(json_str)
-	res:finish()
+--	res:finish()
 end
 
 local function http_is_api_token(str_token)
@@ -39,13 +39,13 @@ _G.http_backend_register = function (path, cb)
 	http_emitter:on('/api/'..path, cb)
 end
 
-http_backend_register('ping', function (http_json)
-return http_response_ok_json("Have a very safe day.")
+http_backend_register('ping', function (res, http_json)
+http_response_ok_json(res, "Have a very safe day.")
 end)
 
 function onRequest (req, res)
 
-if not (req.method == 'POST') then http_response_error_json(res, "Only POST requests") res:finish() end
+if not (req.method == 'POST') then http_response_error_json(res, "Only POST requests") end
 
 local chunks = {}
 local length = 0
@@ -58,14 +58,16 @@ req:on('data', function (chunk)
 	chunks[length] = chunk
 end)
 
+res:setHeader("Content-Type", "application/json")
+
 req:on('end', function ()
     local body = table.concat(chunks, "")
 
     local body_json = json.decode(body)
 
-	if body_json == nil then http_response_error_json(res, "Bad json") res:finish() end
+	if body_json == nil then http_response_error_json(res, "Bad json") return end
 
-	if not http_is_api_token(body_json.token) then http_response_error_json(res, "Bad token") res:finish() end
+	if not http_is_api_token(body_json.token) then http_response_error_json(res, "Bad token") return end
 
 	if http_emitter:listeners(req.url)[1] ~= nil then http_emitter:listeners(req.url)[1](res, body_json) else http_response_error_json(res, "No handlers for this path") end
 	res:finish()
