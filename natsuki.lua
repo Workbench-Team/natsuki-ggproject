@@ -7,10 +7,6 @@ _G.json = require('json')
 _G.timer = require('timer')
 _G.server = '606961070212644894'
 
---_G.mysql_driver = require("luasql.mysql")
---_G.mysql_env = assert (driver.mysql())
-
---_G.mysql = require('./luvit-mysql/mysql') --bye bye shit
 _G.mysql = require('./third_party/luajit_mysql.lua')
 require('./third_party/embed.lua')
 

@@ -136,7 +136,6 @@ command_handler.register('balance', 'Показывает баланс', '<user>
 end)
 
 shop_list = {}
-shop_count = 1
 
 function shop_buy(msg, userid, id, count)
 	if type(count) ~= 'number' then
@@ -200,27 +199,12 @@ function shop_l(msg)
 	msg:reply { embed = embed:get() }
 end
 
-function shop_register(name, description, cost, valute, callback)
-	shop_list[shop_count] = {}
-	shop_list[shop_count]['name'] = name
-	shop_list[shop_count]['description'] = description 
-	shop_list[shop_count]['cost'] = cost 
-	shop_list[shop_count]['valute'] = valute
-	shop_list[shop_count]['amount'] = false
-	shop_list[shop_count]['callback'] = callback 
-	shop_count = shop_count + 1
+function shop_register(name, description, cost, valute, amount, callback)
+	table.insert( shop_list, {name = name, description = description, cost = cost, valute = valute, amount = amount, callback = callback} )
 end
 
 function shop_register_multiple(name, name_multiple, description, cost, valute, amount, callback)
-	shop_list[shop_count] = {}
-	shop_list[shop_count]['name'] = name
-	shop_list[shop_count]['name_multiple'] = name_multiple
-	shop_list[shop_count]['description'] = description 
-	shop_list[shop_count]['cost'] = cost 
-	shop_list[shop_count]['valute'] = valute
-	shop_list[shop_count]['amount'] = amount
-	shop_list[shop_count]['callback'] = callback 
-	shop_count = shop_count + 1
+	table.insert( shop_list, {name = name, name_multiple = name_multiple, description = description, cost = cost, valute = valute, amount = amount, callback = callback} )
 end
 
 command_handler.register('shop', 'Самый убогий магазин который можно было написать для бота в дискорде', 'list / info <id> / buy <id> <count>', false, function (msg, argv, args)
