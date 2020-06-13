@@ -2,9 +2,8 @@ local command_list = {}
 local command_helplist = {}
 local Emitter = core.Emitter
 local command_emitter = Emitter:new()
-command_count = 1
-_G.command_handler = {}
 
+_G.command_handler = {}
 
 cl:on('messageCreate',function(msg)
 	if msg.channel == '660906542169849878' then return end
@@ -22,22 +21,20 @@ cl:on('messageCreate',function(msg)
 	end
 end)
 
-local function register(command, help, help_args, is_admin, cb)
-	command_list[pref..command] = {}
-	command_list[pref..command]['is_admin'] = is_admin
-	command_helplist[command_count] = {}
-	command_helplist[command_count]['command'] = pref..command
+local function register(command, help, help_args, admin, cb)
+	command_list[pref..command] = {admin = admin}
+
+	local help_table = { command = pref..command, admin = admin, help = help, }
+
 	if type(help_args) == 'string' then
-	command_helplist[command_count]['command_help'] = string.format('%s %s', pref..command, help_args)
+	help_table.command_help = string.format('%s %s', pref..command, help_args)
 	else
-	command_helplist[command_count]['command_help'] = pref..command
+	help_table.command_help = pref..command
 	end
-	command_helplist[command_count]['help'] = help
-	command_helplist[command_count]['is_admin'] = is_admin
+
+	table.insert(command_helplist, help_table)
 
 	command_emitter:on(pref..command, cb)
-
-	command_count = command_count + 1
 end
 
 _G.command_handler['register'] = register

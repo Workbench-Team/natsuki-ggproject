@@ -40,8 +40,7 @@ function Embed:initialize(msg, title, description, color, fields )
 end
 
 function Embed:push_field(name, value)
-	local count = #self.table.fields
-	if count == 0 then self.table.fields[1] = {name = name, value = value} else self.table.fields[count + 1] = {name = name, value = value} end
+	table.insert(self.table.fields, {name = name, value = value})
 end
 
 function Embed:get()
