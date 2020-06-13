@@ -38,11 +38,13 @@ end
 
 function privilage_list(server)
 local result = privilage_get(server)
-local shit = string.format("Список привилегий:\n")
+local string_table = {}
+
+table.insert(string_table, string.format("Список привилегий на сервере %s:\n", server))
 
 for i = 1,#result do
-	shit = string.format("%s%s:%s\n", shit, cl:getUser(result[i].userid).tag..' | '..result[i].userid, result[i].privilage)
+	table.insert(string_table, string.format("%s|%s:%s\n", cl:getUser(result[i].userid).tag, result[i].userid, result[i].privilage))
 end
 
-return shit
+return table.concat( string_table )
 end
