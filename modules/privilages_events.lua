@@ -11,7 +11,7 @@ command_handler.register('scpsleventsprivilage', 'Работа с привиле
 		if not userid then return end
 		privilage_set('events', userid, argv[4])
 		msg:reply('Теперь '..cl:getUser(id).tag..' имеет '..argv[4])
-		cl:getChannel('645301914279608350'):send('<@!'..userid..'> - '..argv[4])
+--		cl:getChannel('645301914279608350'):send('<@!'..userid..'> - '..argv[4])
 	end
 
 	if argv[2] == "delete" then
@@ -24,7 +24,7 @@ command_handler.register('scpsleventsprivilage', 'Работа с привиле
 		if not userid then return end
 		privilage_delete('events', userid)
 		msg:reply('Удалены все роли с '..cl:getUser(id).tag)
-		cl:getChannel('645301914279608350'):getMessages(100):find(function(msg) local argv = msg.content:split(' ') if argv[1] == '<@!'..userid..'>' then msg:delete() return end end)
+--		cl:getChannel('645301914279608350'):getMessages(100):find(function(msg) local argv = msg.content:split(' ') if argv[1] == '<@!'..userid..'>' then msg:delete() return end end)
 	end
 
 end)
