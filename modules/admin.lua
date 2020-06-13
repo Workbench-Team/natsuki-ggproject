@@ -12,5 +12,6 @@ command_handler.register('!', 'выполняет команду', '<коман�
 	io.open('result.txt', 'w'):write(result):close()
 	local message = msg:reply { embed = { title = '$ '..cmd, description = result } }
 	if message == nil then msg:reply { embed = { title = 'Ошибка', description = 'Запрос слишком большой или не заканчивается' }, file = 'result.txt' } end
+	os.remove('result.txt')
 	cleardata()
 end)
