@@ -41,7 +41,7 @@ local result = privilage_get(server)
 local shit = string.format("Список привилегий:\n")
 
 for i = 1,#result do
-	shit = string.format("%s%s:%s\n", shit, cl:getUser(result[i].userid).tag, result[i].privilage)
+	shit = string.format("%s%s:%s\n", shit, cl:getUser(result[i].userid).tag..' | '..result[i].userid, result[i].privilage)
 end
 
 return shit
