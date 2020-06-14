@@ -7,6 +7,7 @@ _G.command_handler = {}
 
 cl:on('messageCreate',function(msg)
 	if msg.channel == '660906542169849878' then return end
+	if msg.author.bot == true then return end
 	local args = msg.content
 	local argv = args:split(' ')
 
