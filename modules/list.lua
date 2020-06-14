@@ -20,4 +20,5 @@ return {
 	require('modules/cats'),
 	require('modules/dog'),
 	require('modules/cleardata'),
+	require('modules/ggmembercount'),
 }
