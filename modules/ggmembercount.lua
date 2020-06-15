@@ -6,11 +6,12 @@ timer.setInterval(600000, function()
 		function(vc)
 			result = #vc.connectedMembers + result
 		end)
-		channel1:setName(string.format('В голосовом: %s', result))
+		coroutine.wrap(channel1.setName)(channel1, string.format('В голосовом: %s', result))
 	end
 
 	local channel2 = cl:getChannel('721845451627823185')
 	if channel2 then
-		channel2:setName(string.format('Участников: %s', member.guild.totalMemberCount))
+		coroutine.wrap(channel2.setName)(channel2, string.format('Участников: %s', channel2.guild.totalMemberCount))
 	end
+	return
 end)
