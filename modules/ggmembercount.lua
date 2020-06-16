@@ -1,4 +1,4 @@
-timer.setInterval(600000, function()
+timer.setInterval(300000, function()
 	local channel1 = cl:getChannel('722163883363532890')
 	if channel1 then
 		local result = 0
