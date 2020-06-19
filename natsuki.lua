@@ -39,7 +39,7 @@ cl:on('messageCreate', function(msg)
 	local logs = cl:getChannel('661166664104148993')
 	if msg.channel.type == 1 or msg.channel.type == 3 then
 		local cont = msg.content
-		string.gsub(cont, '@', '`@`')
+		cont = string.gsub(cont, '@', '')
 		logs:send{content='*'..msg.channel.name..'*\n**'..msg.author.tag..'** сказал:\n> '..cont..'\nID автора: '..msg.author.id..'\nID сообщения: '..msg.id, embed=msg.embed}
 		if msg.attachment then
 			for i,v in ipairs(msg.attachments) do
