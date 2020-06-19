@@ -35,17 +35,34 @@ cl:on('ready', function()
 	cl:setStatus('online')
 end)
 
-cl:on('messageCreate',function(msg)
+cl:on('messageCreate', function(msg)
 	local logs = cl:getChannel('661166664104148993')
 	if msg.channel.type == 1 or msg.channel.type == 3 then
 		local cont = msg.content
-		string.gsub(cont, '@everyone', 'everyone')
-		string.gsub(cont, '@here', 'here')
-		logs:send{content='*'..msg.channel.name..'*\n**'..msg.author.tag..'** сказал:\n> '..cont..'\nID канала: '..msg.channel.id..'\nID сообщения: '..msg.id, embed=msg.embed}
+		string.gsub(cont, '@', '`@`')
+		logs:send{content='*'..msg.channel.name..'*\n**'..msg.author.tag..'** сказал:\n> '..cont..'\nID автора: '..msg.author.id..'\nID сообщения: '..msg.id, embed=msg.embed}
 		if msg.attachment then
 			for i,v in ipairs(msg.attachments) do
 				logs:send{content=v.url}
 			end
 		end
+	end
+	if msg.channel.id == logs.id then
+		if msg.author.id == cl.user.id then return end
+		local tbl = msg.content:split(' ')
+		if not tbl[1] then return end
+		local channel = cl:getUser(tbl[1])
+		if not channel then return end
+		table.remove(tbl, 1)
+		channel:send(table.concat(tbl, ' '))
+	end
+end)
+
+cl:on('messageUpdate', function(msg)
+	local logs = cl:getChannel('661166664104148993')
+	if msg.channel.type == 1 or msg.channel.type == 3 then
+		local cont = msg.content
+		string.gsub(cont, '@', '`@`')
+		logs:send{content='*'..msg.channel.name..'*\n**'..msg.author.tag..'** изменил сообщение:\n> '..cont..'\nID канала: '..msg.channel.id..'\nID сообщения: '..msg.id, embed=msg.embed}
 	end
 end)
