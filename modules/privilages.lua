@@ -43,7 +43,7 @@ local string_table = {}
 table.insert(string_table, string.format("Список привилегий на сервере %s:\n", server))
 
 for i = 1,#result do
-	table.insert(string_table, string.format("%s|%s:%s\n", cl:getUser(result[i].userid).tag, result[i].userid, result[i].privilage))
+	table.insert(string_table, string.format("%s ID:%s - %s\n", cl:getUser(result[i].userid).tag, result[i].userid, result[i].privilage))
 end
 
 return table.concat( string_table )

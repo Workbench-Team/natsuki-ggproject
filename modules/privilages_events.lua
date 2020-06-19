@@ -1,5 +1,22 @@
+function split(str, size)
+	local s = {}
+	for i=1, #str, size do
+		s[#s+1] = str:sub(i, i+size - 1)
+	end
+	return s
+end
+
 command_handler.register('scpsleventsprivilage', 'Работа с привилегиями на scp:sl events', "list / set <user> <type> / delete <user>", true, function (msg, argv, args)
-	if argv[2] == "list" then msg.channel:send(privilage_list('events')) end
+	if argv[2] == "list" then
+		local list = privilage_list('events')
+		if #list >= 2000 then
+			for i, v in ipairs(split(list, 1999)) do
+				msg.channel:send(v)
+			end
+		else
+			msg.channel:send(list)
+		end
+	end
 
 	if argv[2] == "set" then
 		if msg.guild.id ~= server then return end
