@@ -23,6 +23,7 @@ end
 function privilege_add_noexpiry(server, userid, privilege, expiry)
 	local mysql_db = mysql.connect( mysql_host, mysql_port, mysql_user, mysql_password, mysql_db_name)
 	mysql_db:query( string.format("INSERT INTO privileges_%s( userid, privilege ) VALUES('%s','%s')", server, userid, privilege) )
+	mysql_db:close()
 end
 
 function privilege_get(server)
