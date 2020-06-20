@@ -1,10 +1,13 @@
-local method = 'privilage/'
+local method = 'privilege/'
 
-function privilage_set(server, userid, privilage)
-	local method = method..'set'
+function privilege_add(server, userid, privilege, expiry)
+	local method = method..'add'
 	data["server"] = server
 	data["userid"] = userid
-	data["privilage"] = privilage
+	data["privilege"] = privilege
+	if expiry ~= '-1' then
+		data["expiry"] = expiry
+	end
 	local data = json.encode(data)
 	local data, body = http.request('POST', backend_url..method, nil, data)
 	if not body then return false end
@@ -13,10 +16,11 @@ function privilage_set(server, userid, privilage)
 	return result
 end
 
-function privilage_delete(server, userid)
-	local method = method..'delete'
+function privilege_remove(server, userid, privilege)
+	local method = method..'remove'
 	data["server"] = server
 	data["userid"] = userid
+	data["privilege"] = privilege
 	local data = json.encode(data)
 	local data, body = http.request('POST', backend_url..method, nil, data)
 	if not body then return false end
@@ -25,7 +29,7 @@ function privilage_delete(server, userid)
 	return result
 end
 
-function privilage_get(server)
+function privilege_get(server)
 	local method = method..'get'
 	data["server"] = server
 	local data = json.encode(data)
@@ -36,15 +40,15 @@ function privilage_get(server)
 	return result
 end
 
-function privilage_list(server)
-local result = privilage_get(server)
-local string_table = {}
+function privilege_list(server)
+	local result = privilege_get(server)
+	local string_table = {}
 
-table.insert(string_table, string.format("Список привилегий на сервере %s:\n", server))
+	table.insert(string_table, string.format("Список привилегий на сервере %s:\n", server))
 
-for i = 1,#result do
-	table.insert(string_table, string.format("%s ID:%s - %s\n", cl:getUser(result[i].userid).tag, result[i].userid, result[i].privilage))
-end
+	for i = 1,#result do
+		table.insert(string_table, string.format("%s ID:%s - %s\n", cl:getUser(result[i].userid).tag, result[i].userid, result[i].privilege))
+	end
 
-return table.concat( string_table )
+	return table.concat( string_table )
 end

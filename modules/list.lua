@@ -1,8 +1,8 @@
 return {
 	require('modules/cmd_handler'),
 	require('modules/money'),
-	require('modules/privilages'),
-	require('modules/privilages_events'),
+	require('modules/privileges'),
+	require('modules/privileges_events'),
 	require('modules/admin'),
 	require('modules/economy'),
 	require('modules/say'),
@@ -21,4 +21,5 @@ return {
 	require('modules/dog'),
 	require('modules/cleardata'),
 	require('modules/ggmembercount'),
+	require('modules/split'),
 }

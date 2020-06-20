@@ -78,4 +78,4 @@ http.createServer(onRequest):listen(listen_port)
 
 require('modules/exec')
 require('modules/accounts_link')
-require('modules/privilages')
+require('modules/privileges')
