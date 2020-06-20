@@ -63,6 +63,6 @@ cl:on('messageUpdate', function(msg)
 	if msg.channel.type == 1 or msg.channel.type == 3 then
 		local cont = msg.content
 		string.gsub(cont, '@', '`@`')
-		logs:send{content='*'..msg.channel.name..'*\n**'..msg.author.tag..'** изменил сообщение:\n> '..cont..'\nID канала: '..msg.channel.id..'\nID сообщения: '..msg.id, embed=msg.embed}
+		logs:send{content='*'..msg.channel.name..'*\n**'..msg.author.tag..'** изменил сообщение:\n> '..cont..'\nID автора: '..msg.author.id..'\nID сообщения: '..msg.id, embed=msg.embed}
 	end
 end)
