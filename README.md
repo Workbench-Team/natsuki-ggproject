@@ -87,4 +87,4 @@ Just create `config.json` with following configs:
 ```
 
 # License
-[GNU General Public License v3.0](https://raw.githubusercontent.com/ProfessorBrain/natsuki/master/LICENSE)
+[GNU General Public License v3.0](https://github.com/ProfessorBrain/natsuki/blob/master/LICENSE)
