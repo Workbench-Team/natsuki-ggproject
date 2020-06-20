@@ -44,11 +44,13 @@ function privilege_list(server)
 	local result = privilege_get(server)
 	local string_table = {}
 
-	table.insert(string_table, string.format("Список привилегий на сервере %s:\n", server))
+	table.insert(string_table, string.format("Список привилегий на сервере %s:\n```", server))
 
 	for i = 1,#result do
 		table.insert(string_table, string.format("%s ID:%s - %s\n", cl:getUser(result[i].userid).tag, result[i].userid, result[i].privilege))
 	end
+
+	table.insert(string_table, '```')
 
 	return table.concat( string_table )
 end
