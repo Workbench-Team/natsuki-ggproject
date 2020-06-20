@@ -19,6 +19,7 @@ command_handler.register('eventsprivilege', 'Работа с привилеги�
 		id = string.gsub(id, '!', '')
 		local userid = cl:getUser(id).id
 		if not userid then return end
+		if not argv[4] then return end
 		privilege_add('events', userid, argv[4], expiry)
 		msg:reply('Теперь '..cl:getUser(id).tag..' имеет '..argv[4])
 	end
