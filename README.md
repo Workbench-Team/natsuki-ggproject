@@ -73,7 +73,7 @@ Just create `config.json` with following configs:
   "tokens": ["backend token 1", "backend token 2", "and more tokens"],
   "privilege_servers": ["server_name_1", "server_name_2"],
   "mysql_db_host": "database_remote_ip",
-  "mysql_db_port": database_remote_port,
+  "mysql_db_port": 3306,
   "mysql_db_user": "database_user",
   "mysql_db_password": "database_user_password",
   "mysql_db_name": "database_name"
