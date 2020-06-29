@@ -20,7 +20,6 @@ The project is dedicated to creating unique servers on the Internet. Of course, 
   - Archive of appelas of GG project
   - Command to give clan roles for clan owners of GG project
   - Write all servers where bot is
-  - Move backend to other repository
 
 ## Install and config
 
@@ -63,7 +62,7 @@ groups = {
 ```
 
 ## Backend
-To work with backend, you need to config and launch backend server from `backend` folder
+To work with backend, you need to config and launch backend server from [this repository](https://github.com/ProfessorBrain/backend)
 
 ### Config
 Just create `config.json` with following configs:
