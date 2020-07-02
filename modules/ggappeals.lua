@@ -82,7 +82,7 @@ cl:on('reactionAdd', function(react, userid)
 	end
 end)
 cl:on('reactionAddUncached', function(chnl, msgid, hash, userid)
-	if not channel.category then return end
+	if not chnl.category then return end
 	if chnl.category.id == category and userid ~= cl.user.id then
 		local user = cl:getUser(userid)
 		if hash ~= '❌' then return end
