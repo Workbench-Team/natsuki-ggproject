@@ -30,7 +30,7 @@ require('modules/list')
 cl:on('ready', function()
 	cl:setGame {
 		type = 3,
-		name = pref..'help | under dev'
+		name = pref..'help'
 	}
 	cl:setStatus('online')
 end)

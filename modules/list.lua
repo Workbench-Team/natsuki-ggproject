@@ -22,4 +22,5 @@ return {
 	require('modules/cleardata'),
 	require('modules/ggmembercount'),
 	require('modules/split'),
+	require('modules/botserverscount'),
 }
