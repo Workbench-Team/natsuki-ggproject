@@ -101,7 +101,7 @@ ffi.cdef[[
 
 ]]
 
-local clib = pcall( function() ffi.load( "/usr/lib/x86_64-linux-gnu/libmysqlclient.so", true ) end ) -- for 64 bit luajit
+local clib = pcall( function() ffi.load( "/usr/lib/x86_64-linux-gnu/libmysqlclient.so.20", true ) end ) -- for 64 bit luajit
 
 if not clib then
 	local clib = pcall( function() ffi.load( "/usr/lib/libmysqlclient.so", true ) end ) -- 32 bit
