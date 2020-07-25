@@ -1,4 +1,4 @@
-command_handler.register('chillmusic', 'Lofi Hip Hop/Chillhop/Electro/Melodic Dubstep музыка', nil, false, function (msg, argv, args)
+command_handler.register('chillmusic', 'Lofi Hip Hop/Chillhop/Electro/Melodic Dubstep музыка', '| deprecated, need rewrite', false, function (msg, argv, args)
 	if msg.channelType == 1 or msg.channelType == 3 then return end
 
 	if not argv[2] then

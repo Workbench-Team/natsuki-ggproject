@@ -16,10 +16,11 @@ The project is dedicated to creating unique servers on the Internet. Of course, 
   - New privileges system
   - Votes for GG Events
   - Automatic check reviews of GG Project
-  - Rewrite voice module for any stream
+  - Rewrite voice module for any stream and playing music
   - Archive of appelas of GG project
   - Command to give clan roles for clan owners of GG project
   - Write all servers where bot is
+  - Translation to other languages
 
 ## Install and config
 
@@ -47,10 +48,12 @@ Other configs in that `config.json` requires with some modules
 To disable some modules you need to comment lines in `modules/list.lua`
 
 Configs, that allows to use some modules:
-  - `backend_url`, `backend_token` - `admin`, `privileges`, `accounts_link`
-  - `qiwi_hook_id` - `qiwidonat`
-  - `economy_smile`, `economy_curse_in` - `economy`
-  - `donation_channel_id` - `money`
+Configs | Config description | Allowed modules
+--- | --- | ---
+`backend_url`, `backend_token` | Use [backend](https://github.com/GG-Project/backend) | `admin`, `privileges`, `accounts_link`
+`qiwi_hook_id` | Qiwi donate notifier. DEPRECATED | `qiwidonat`
+`economy_smile`, `economy_curse_in` | Economy valute emoji and curse. DEPRECATED | `economy`
+`donation_channel_id` | Notify to specified channel id about donate. DEPRECATED | `money`
 
 ### Privileges
 `groups.lua` config for `admin` module:
