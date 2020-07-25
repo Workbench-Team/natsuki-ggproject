@@ -22,7 +22,10 @@ function account_get_link(userid, account_type)
 	local data = json.encode(data)
 	local data, body = http.request('POST', backend_url..method, nil, data)
 	if not body then return false end
+	if not json.decode(body) then return false end
+	if not json.decode(body)["data"] then return false end
 	local result = json.decode(body)["data"]
+	if not result then return false end
 	cleardata()
 	return result
 end
