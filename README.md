@@ -25,7 +25,7 @@ The project is dedicated to creating unique servers on the Internet. Of course, 
 
 ### Install and launch
 ```sh
-  $ git clone https://github.com/ProfessorBrain/natsuki.git
+  $ git clone https://github.com/GG-Project/natsuki.git
   $ cd natsuki/
   $ luvit natsuki.lua
 ```
@@ -62,7 +62,7 @@ groups = {
 ```
 
 ## Backend
-To work with backend, you need to config and launch backend server from [this repository](https://github.com/ProfessorBrain/backend)
+To work with backend, you need to config and launch backend server from [this repository](https://github.com/GG-Project/backend)
 
 ### Config
 Just create `config.json` with following configs:
