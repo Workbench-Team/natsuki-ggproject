@@ -1,20 +1,12 @@
 command_handler.register('say', 'Сказать <text>', '<text>', false, function (msg, argv, args)
+	local content = msg.content:gsub(argv[1], ''):gsub(content, '@everyone', 'everyone'):gsub(content, '@here', 'here')
 	msg.channel:broadcastTyping()
-	table.remove(argv, 1)
-	for k, v in pairs(argv) do
-		string.gsub(v, '@everyone', 'everyone')
-		string.gsub(v, '@here', 'here')
-	end
-	msg:reply(table.concat(argv, ' '))
+	msg:reply(content)
 end)
 
 command_handler.register('sayd', 'Сказать <text> и удалить ваше сообщение', '<text>', false, function (msg, argv, args)
+	local content = msg.content:gsub(argv[1], ''):gsub(content, '@everyone', 'everyone'):gsub(content, '@here', 'here')
 	msg.channel:broadcastTyping()
-	table.remove(argv, 1)
-	for k, v in pairs(argv) do
-		string.gsub(v, '@everyone', 'everyone')
-		string.gsub(v, '@here', 'here')
-	end
-	msg:reply(table.concat(argv, ' '))
+	msg:reply(content)
 	msg:delete()
 end)
