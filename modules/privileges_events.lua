@@ -3,10 +3,10 @@ command_handler.register('eventsprivilege', 'Работа с привилеги�
 		local list = privilege_list('events')
 		if #list >= 2000 then
 			for i, v in ipairs(split(list, 1999)) do
-				msg.channel:send(v)
+				msg.channel:send('```\n'..v..'\n```')
 			end
 		else
-			msg.channel:send(list)
+			msg.channel:send('```\n'..list..'\n```')
 		end
 	end
 
