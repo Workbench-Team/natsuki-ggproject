@@ -14,7 +14,9 @@ _G.uv = require('uv')
 disc.extensions()
 
 _G.pref = 'n/'
-_G.config = json.decode(io.open("config.json", "r"):read("*a"))
+file_config =  io.open("config.json", "r")
+_G.config = json.decode(file_config:read("*a"))
+file_config:close()
 
 token = config["token"]
 cl:run('Bot '..token)
@@ -25,7 +27,14 @@ _G.data = {["token"] = backend_token}
 _G.data_backup = {["token"] = backend_token}
 
 require('groups')
-require('modules/list')
+require('modules')
+
+for i = 1,#config.modules do
+	local func, err = loadfile(string.format("modules/%s.lua", config.modules[i]))
+	if func == nil then print(string.format("Module %s load failed with error %s", config.modules[i], err)) end
+	local result, err = pcall(func)
+	if result == false then print(string.format("Module %s load failed with error %s", config.modules[i], err)) end
+end
 
 cl:on('ready', function()
 	cl:setGame {
