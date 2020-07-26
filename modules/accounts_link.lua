@@ -105,11 +105,11 @@ command_handler.register('getlinkedaccount', 'Выводит ваши привя
 		local user = cl:getUser(id)
 		if not user then msg:reply('Не найден указанный пользователь') return end
 		local result = account_get_link(user.id, type)
-		if result == 'no account linked with userid' then msg:reply(string.format('У пользователя %s отсутствует привязанный аккаунт типа %s', user.tag, type)) return end
+		if result == false then msg:reply(string.format('У пользователя %s отсутствует привязанный аккаунт типа %s', user.tag, type)) return end
 		msg:reply(string.format('%s пользователя %s: %s', type, user.tag, result))
 	else
 		local result = account_get_link(msg.author.id, type)
-		if result == 'no account linked with userid' then msg:reply(string.format('У вас отсутствует привязанный аккаунт типа %s', type)) return end
+		if result == false then msg:reply(string.format('У вас отсутствует привязанный аккаунт типа %s', type)) return end
 		msg:reply(string.format('Ваш %s: %s', type, result))
 	end
 end)
