@@ -13,11 +13,11 @@
 	if argv[2] == "add" then
 		local expiry = '-1' -- Пока что без даты окончания
 		if msg.guild.id ~= server then return end
-		local id = string.gsub(argv[3], '@', '')
-		id = string.gsub(id, '<', '')
-		id = string.gsub(id, '>', '')
-		id = string.gsub(id, '!', '')
-		local userid = cl:getUser(id).id
+		local user = msg.mentionedUsers.first or cl:getUser(argv[2])
+		local userid
+		if user then
+			userid = user.id
+		end
 		if not userid then return end
 		if not argv[4] then return end
 		privilege_add('events', userid, argv[4], expiry)
@@ -26,11 +26,11 @@
 
 	if argv[2] == "remove" then
 		if msg.guild.id ~= server then return end
-		local id = string.gsub(argv[3], '@', '')
-		id = string.gsub(id, '<', '')
-		id = string.gsub(id, '>', '')
-		id = string.gsub(id, '!', '')
-		local userid = cl:getUser(id).id
+		local user = msg.mentionedUsers.first or cl:getUser(argv[2])
+		local userid
+		if user then
+			userid = user.id
+		end
 		if not userid then return end
 		if not argv[4] then return end
 		privilege_remove('events', userid, argv[4])
