@@ -13,7 +13,7 @@ cl:on('messageCreate',function(msg)
 
 	if command_list[argv[1]] == nil then return end
 
-	if command_list[argv[1]].is_admin == true then
+	if command_list[argv[1]].admin == true then
 	local alwd_g = {['admin'] = true, ['owner'] = true}
 	local user_g = groups[msg.author.id]
 	if alwd_g[user_g] == true then command_emitter:emit(argv[1], msg, argv, args) else msg:reply(msg.author.mentionString..' необходимо иметь группу `admin` или `owner`.') end
