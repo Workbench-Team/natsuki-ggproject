@@ -21,7 +21,7 @@
 		if not userid then return end
 		if not argv[4] then return end
 		privilege_add('events', userid, argv[4], expiry)
-		msg:reply('Теперь '..cl:getUser(id).tag..' имеет '..argv[4])
+		msg:reply('Теперь '..cl:getUser(userid).tag..' имеет '..argv[4])
 	end
 
 	if argv[2] == "remove" then
@@ -34,7 +34,7 @@
 		if not userid then return end
 		if not argv[4] then return end
 		privilege_remove('events', userid, argv[4])
-		msg:reply(string.format('Удалена роль %s с пользователя %s', argv[4], cl:getUser(id).tag))
+		msg:reply(string.format('Удалена роль %s с пользователя %s', argv[4], cl:getUser(userid).tag))
 	end
 
 end)
