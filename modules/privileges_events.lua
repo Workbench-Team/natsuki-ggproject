@@ -13,7 +13,7 @@
 	if argv[2] == "add" then
 		local expiry = '-1' -- Пока что без даты окончания
 		if msg.guild.id ~= server then return end
-		local user = msg.mentionedUsers.first or cl:getUser(argv[2])
+		local user = msg.mentionedUsers.first or cl:getUser(argv[3])
 		local userid
 		if user then
 			userid = user.id
@@ -26,7 +26,7 @@
 
 	if argv[2] == "remove" then
 		if msg.guild.id ~= server then return end
-		local user = msg.mentionedUsers.first or cl:getUser(argv[2])
+		local user = msg.mentionedUsers.first or cl:getUser(argv[3])
 		local userid
 		if user then
 			userid = user.id
