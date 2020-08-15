@@ -133,6 +133,7 @@ msg.channel:send{embed = embed:get()}
 end
 
 command_handler.register('eco', 'Экономика', 'money / work', false, function (msg, argv, args)
+	if not msg.guild then return end
 	if msg.guild.id ~= server then return end
 	local userid = msg.author.id
 	if argv[2] == nil then msg.channel:send('Недостаточно аргументов') return end
