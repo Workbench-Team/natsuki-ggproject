@@ -1,21 +1,21 @@
 cl:on('reactionAdd', function(reaction, userid)
 	if userid == cl.user.id then return end
-	if reaction.message.channel.id == '650781688754077766' then newsSubs(reaction.emojiHash, userid) end
+--	if reaction.message.channel.id == '650781688754077766' then newsSubs(reaction.emojiHash, userid) end
 	return
 end)
 cl:on('reactionAddUncached', function(channel, messageid, hash, userid)
 	if userid == cl.user.id then return end
-	if channel.id == '650781688754077766' then newsSubs(hash, userid) end
+--	if channel.id == '650781688754077766' then newsSubs(hash, userid) end
 	return
 end)
 
 cl:on('reactionRemove', function(reaction, userid)
-	if reaction.message.channel.id == '650781688754077766' then newsRemoveSubs(reaction.emojiHash, userid) end
+--	if reaction.message.channel.id == '650781688754077766' then newsRemoveSubs(reaction.emojiHash, userid) end
 	return
 end)
 
 cl:on('reactionRemoveUncached', function(channel, messageid, hash, userid)
-	if channel.id == '650781688754077766' then newsRemoveSubs(hash, userid) end
+--	if channel.id == '650781688754077766' then newsRemoveSubs(hash, userid) end
 	return
 end)
 
@@ -29,14 +29,15 @@ function setupSubs()
 	local pb = cl:getRole('677146477994311691')
 	local ggma = cl:getRole('719330770677923840')
 	local msg = channel:getMessage('650793780005437441')
-	msg:setContent('В этом канале вы можете подписаться на различные новости.\nДля этого есть соответствующие реакции ниже:\n🇦 - <@&'..ggevents.id..'>\n🇧 - <@&'..ggdm.id..'>\n🇨 - <@&'..ggcinema.id..'>\n🇩 - <@&'..scpsl.id..'>\n🇪 - <@&'..pb.id..'>\n🇫 - <@&'..ggorange.id..'>\n🇬 - <@&'..ggma.id..'>')
+--[[	msg:setContent('В этом канале вы можете подписаться на различные новости.\nДля этого есть соответствующие реакции ниже:\n🇦 - <@&'..ggevents.id..'>\n🇧 - <@&'..ggdm.id..'>\n🇨 - <@&'..ggcinema.id..'>\n🇩 - <@&'..scpsl.id..'>\n🇪 - <@&'..pb.id..'>\n🇫 - <@&'..ggorange.id..'>\n🇬 - <@&'..ggma.id..'>')
 	msg:addReaction('🇦')
 	msg:addReaction('🇧')
 	msg:addReaction('🇨')
 	msg:addReaction('🇩')
 	msg:addReaction('🇪')
 	msg:addReaction('🇫')
-	msg:addReaction('🇬')
+	msg:addReaction('🇬')]]
+	msg:setContent('Подписка на новости перемещена на бота '..cl:getUser('204255221017214977').mentionString..'. Для подписки на новости используйте команду `-role role-name`, для списка ролей: `-role`')
 end
 
 function newsSubs(hash, userid)
