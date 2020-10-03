@@ -1,13 +1,14 @@
 	command_handler.register('eventsprivilege', 'Работа с привилегиями на GG Events', "list / add <user> <type> / remove <user> <privilege>", true, function (msg, argv, args)
 	if argv[2] == "list" then
 		local list = privilege_list('events')
-		if #list >= 999 then
-			for i, v in ipairs(split(list, 999)) do
-				msg.channel:send('```\n'..v..'\n```')
-			end
-		else
+		p(list)
+--		if #list >= 999 then
+--			for i, v in ipairs(split(list, 999)) do
+--				msg.channel:send('```\n'..v..'\n```')
+--			end
+--		else
 			msg.channel:send('```\n'..list..'\n```')
-		end
+--		end
 	end
 
 	if argv[2] == "add" then
