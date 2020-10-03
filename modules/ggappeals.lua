@@ -44,7 +44,6 @@ function createappeals(msg)
 	appeal:getPermissionOverwriteFor(msg.member):allowPermissions(0x00000400)
 	if type == 'eventsadmin' then
 		appeal:getPermissionOverwriteFor(cl:getRole('628295268911284225')):delete()
-		appeal:getPermissionOverwriteFor(cl:getRole('639003693227704331')):delete()
 		appeal:getPermissionOverwriteFor(cl:getRole('627161428989837312')):delete()
 		appeal:getPermissionOverwriteFor(cl:getRole('627161097182642176')):delete()
 	end
