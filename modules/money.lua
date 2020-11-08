@@ -109,7 +109,7 @@ end
 
 command_handler.register('balance', 'Показывает баланс', '<user> or anon', false, function (msg, argv, args)
 	if msg.guild.id ~= server then return end
-	if argv[2] == 'anon' then
+--[[	if argv[2] == 'anon' then
 		local embed = Embed:new(msg, 'Анонимно задоначено:', string.format('%.2f RUB\n%.2f EUR\n%.2f USD\n%.2f KZT\n', balance_get('anon', 643), balance_get('anon', 978), balance_get('anon', 840), balance_get('anon', 398)), 0x36B973)
 		msg.channel:send{embed = embed:get()}
 		return
@@ -132,7 +132,8 @@ command_handler.register('balance', 'Показывает баланс', '<user>
 	donation_msg = string.format('%s%s', donation_msg, 'Для доната перейдите по ссылке, в комментариях укажите __**ТОЛЬКО**__ эти цифры без лишних пробелов, символов и слов, то есть только эти цифры, в ином случае донат будет анонимным.\nhttps://qiwi.com/n/PRBRAIN\n')
 	donation_msg = string.format('%s%s', donation_msg, 'Ваш баланс:\n')
 	local embed = Embed:new(msg, nil, string.format('%.2f RUB\n%.2f EUR\n%.2f USD\n%.2f KZT\nДля пополнения баланса, перейдите по ссылке и введите `%s` (Для каждого эти цифры уникальны) в поле с комментарием и ничего больше (ни пробелов, ни других слов и символов) ||https://qiwi.com/n/PRBRAIN|| **__(если вы прочитали условие для пополнения, нажмите по закрашенной тёмным цветом кнопке, чтобы увидеть и открыть ссылку для пополнения)__**', balance_get(userid, 643), balance_get(userid, 978), balance_get(userid, 840), balance_get(userid, 398), userid), 0x36B973)
-	msg.channel:send{embed = embed:get()}
+	msg.channel:send{embed = embed:get()}]]
+	msg:reply { embed = Embed:new(msg, '**Система баланса отключена.**', 'Причина: Закрытие проекта.\nНовая ссылка для поддержки команды разработчиков: [Patreon (временный)](https://www.patreon.com/professorbrain).\nПрисоединяйтесь к нашему [Discord](https://discord.gg/Dxqz5gy) чтобы узнать больше.', 16098851):get() }
 end)
 
 shop_list = {}
